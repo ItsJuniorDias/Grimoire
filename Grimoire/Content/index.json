@@ -1,0 +1,1152 @@
+{
+  "version": 1,
+  "language": "en",
+  "total": 50,
+  "plannedTotal": 50,
+  "freeCount": 3,
+  "stories": [
+    {
+      "id": "st-001",
+      "title": "The Sleeping Lighthouse",
+      "slug": "the-sleeping-lighthouse",
+      "premium": true,
+      "order": 1,
+      "level": "apprentice",
+      "cover": {
+        "asset": "CoverFarol",
+        "accent": "#C1352A"
+      },
+      "summary": "When the old lighthouse goes dark for the first time in a hundred years, Nina discovers it never guided ships at all — it kept something out.",
+      "readingMinutes": 9,
+      "tags": [
+        "sea",
+        "mystery",
+        "courage",
+        "night"
+      ],
+      "language": "en",
+      "file": "st-001.json"
+    },
+    {
+      "id": "st-002",
+      "title": "The Clockmaker of Stolen Hours",
+      "slug": "the-clockmaker-of-stolen-hours",
+      "premium": true,
+      "order": 2,
+      "level": "apprentice",
+      "cover": {
+        "asset": "CoverRelojoeiro",
+        "accent": "#C79A3E"
+      },
+      "summary": "In the town of Greyhollow, the clocks begin running backward and people forget the things they love. Tomás, a clockmaker's apprentice, is the only one who notices — because he's the only one who hasn't forgotten yet.",
+      "readingMinutes": 10,
+      "tags": [
+        "time",
+        "memory",
+        "mystery",
+        "town"
+      ],
+      "language": "en",
+      "file": "st-002.json"
+    },
+    {
+      "id": "st-003",
+      "title": "The Girl Who Planted a Door",
+      "slug": "the-girl-who-planted-a-door",
+      "premium": true,
+      "order": 3,
+      "level": "initiate",
+      "cover": {
+        "asset": "CoverPorta",
+        "accent": "#4A5A3C"
+      },
+      "summary": "Iara finds a seed that promises to return anything lost — including the brother she hasn't seen in a year. But what grows from a seed like that is never exactly what was planted.",
+      "readingMinutes": 10,
+      "tags": [
+        "forest",
+        "grief",
+        "folklore",
+        "family",
+        "bargain"
+      ],
+      "language": "en",
+      "file": "st-003.json"
+    },
+    {
+      "id": "st-004",
+      "title": "The Name Collector",
+      "slug": "the-name-collector",
+      "premium": true,
+      "order": 4,
+      "level": "apprentice",
+      "cover": {
+        "asset": "CoverNomes",
+        "accent": "#C79A3E"
+      },
+      "summary": "At a fair that only appears when it snows, an old man buys names in exchange for warm coins. Bento sells his as a joke — and discovers that without a name, no one can call him home anymore.",
+      "readingMinutes": 11,
+      "tags": [
+        "fair",
+        "identity",
+        "winter",
+        "bargain"
+      ],
+      "language": "en",
+      "file": "st-004.json"
+    },
+    {
+      "id": "st-005",
+      "title": "The House That Counted",
+      "slug": "the-house-that-counted",
+      "premium": true,
+      "order": 5,
+      "level": "initiate",
+      "cover": {
+        "asset": "CoverCasa",
+        "accent": "#263A4D"
+      },
+      "summary": "Mira's aunt lives in a house with one rule: never count the rooms. On a bored afternoon, Mira counts — and the house, proud to have finally been noticed, begins to grow to deserve the attention.",
+      "readingMinutes": 10,
+      "tags": [
+        "house",
+        "mystery",
+        "family",
+        "fear"
+      ],
+      "language": "en",
+      "file": "st-005.json"
+    },
+    {
+      "id": "st-006",
+      "title": "The River That Ran Backward",
+      "slug": "the-river-that-ran-backward",
+      "premium": true,
+      "order": 6,
+      "level": "conjurer",
+      "cover": {
+        "asset": "CoverRio",
+        "accent": "#4A5A3C"
+      },
+      "summary": "Everyone in Stillmouth throws into the river whatever they want to be rid of, and the river carries it away. But when Tomé's grandmother goes upriver by mistake, he discovers there's a place where the river gives everything back — and that reaching it means going against the current of his own memory.",
+      "readingMinutes": 13,
+      "tags": [
+        "river",
+        "memory",
+        "grief",
+        "courage",
+        "folklore"
+      ],
+      "language": "en",
+      "file": "st-006.json"
+    },
+    {
+      "id": "st-007",
+      "title": "The Iron Girl and the Paper Dragon",
+      "slug": "the-iron-girl-and-the-paper-dragon",
+      "premium": true,
+      "order": 7,
+      "level": "conjurer",
+      "cover": {
+        "asset": "CoverFerro",
+        "accent": "#C1352A"
+      },
+      "summary": "The town pays tribute to a fearsome dragon no one has ever seen up close. When Wren is chosen to be given to it, she goes armed and furious — and discovers that the most frightening monster in the world might be someone as lonely and scared as she is.",
+      "readingMinutes": 11,
+      "tags": [
+        "dragon",
+        "courage",
+        "fear",
+        "friendship",
+        "truth"
+      ],
+      "language": "en",
+      "file": "st-007.json"
+    },
+    {
+      "id": "st-008",
+      "title": "The Borrowed Mirror",
+      "slug": "the-borrowed-mirror",
+      "premium": true,
+      "order": 8,
+      "level": "initiate",
+      "cover": {
+        "asset": "CoverEspelho",
+        "accent": "#263A4D"
+      },
+      "summary": "A glassmaker sells mirrors that show you a little better than you are — prettier, calmer, more loved. Dahlia buys one, and each day she likes her real face less, until the day the reflection refuses to give her back.",
+      "readingMinutes": 10,
+      "tags": [
+        "mirror",
+        "identity",
+        "vanity",
+        "mystery"
+      ],
+      "language": "en",
+      "file": "st-008.json"
+    },
+    {
+      "id": "st-009",
+      "title": "The Orchestra of Silence",
+      "slug": "the-orchestra-of-silence",
+      "premium": true,
+      "order": 9,
+      "level": "conjurer",
+      "cover": {
+        "asset": "CoverOrquestra",
+        "accent": "#C79A3E"
+      },
+      "summary": "In the village of Hush, making noise is forbidden — because silence is sold, bottled, and shipped to the big cities that can no longer sleep. When Rui's little brother is taken to become another 'musician of silence,' Rui must learn that the loudest thing in the world can be made with no sound at all.",
+      "readingMinutes": 10,
+      "tags": [
+        "sound",
+        "silence",
+        "courage",
+        "family",
+        "freedom"
+      ],
+      "language": "en",
+      "file": "st-009.json"
+    },
+    {
+      "id": "st-010",
+      "title": "The Keeper of Doors That Don't Exist",
+      "slug": "the-keeper-of-doors-that-dont-exist",
+      "premium": true,
+      "order": 10,
+      "level": "archmage",
+      "cover": {
+        "asset": "CoverGuardiao",
+        "accent": "#5E1410"
+      },
+      "summary": "A girl discovers she can see doors no one else can — doors to the places where lost things end up. An old keeper offers to pass on his duty: to watch those doors forever, alone. But Esther must decide whether guarding the world is worth giving up living in it.",
+      "readingMinutes": 12,
+      "tags": [
+        "doors",
+        "sacrifice",
+        "solitude",
+        "duty",
+        "choice"
+      ],
+      "language": "en",
+      "file": "st-010.json"
+    },
+    {
+      "id": "st-011",
+      "title": "The Weaver of Endings",
+      "slug": "the-weaver-of-endings",
+      "premium": true,
+      "order": 11,
+      "level": "archmage",
+      "cover": {
+        "asset": "CoverTecela",
+        "accent": "#4A5A3C"
+      },
+      "summary": "High in a tower, an old woman weaves the ending of every story in the world on an endless loom. When Lino climbs up to beg a happy ending for his sick mother's story, he discovers that the weaver does not choose the endings — and that the power to change them may lie in a hand much closer than he imagined.",
+      "readingMinutes": 10,
+      "tags": [
+        "stories",
+        "fate",
+        "hope",
+        "family",
+        "choice"
+      ],
+      "language": "en",
+      "file": "st-011.json"
+    },
+    {
+      "id": "st-012",
+      "title": "The Boy With No Shadow",
+      "slug": "the-boy-with-no-shadow",
+      "premium": true,
+      "order": 12,
+      "level": "apprentice",
+      "cover": {
+        "asset": "CoverSombra",
+        "accent": "#263A4D"
+      },
+      "summary": "Pip trades his own shadow for a whole day of luck — and at first it's wonderful. But a shadow does more than we imagine, and without his, Pip begins to grow too light, too forgotten, almost transparent. To get it back, he has to understand why the shadow followed him.",
+      "readingMinutes": 9,
+      "tags": [
+        "shadow",
+        "luck",
+        "identity",
+        "courage"
+      ],
+      "language": "en",
+      "file": "st-012.json"
+    },
+    {
+      "id": "st-013",
+      "title": "The Library of Unwritten Books",
+      "slug": "the-library-of-unwritten-books",
+      "premium": true,
+      "order": 13,
+      "level": "initiate",
+      "cover": {
+        "asset": "CoverBiblioteca",
+        "accent": "#C79A3E"
+      },
+      "summary": "There is a hidden library that holds every book people dreamed of writing and never wrote. When Cléo finds there the book her father began before he died — unfinished — she just wants to take it. But the librarian tells her there is only one way to remove a book from that library, and it isn't by carrying it.",
+      "readingMinutes": 9,
+      "tags": [
+        "books",
+        "grief",
+        "dreams",
+        "family",
+        "courage"
+      ],
+      "language": "en",
+      "file": "st-013.json"
+    },
+    {
+      "id": "st-014",
+      "title": "The Last Wolf of Snowvale",
+      "slug": "the-last-wolf-of-snowvale",
+      "premium": true,
+      "order": 14,
+      "level": "conjurer",
+      "cover": {
+        "asset": "CoverLoba",
+        "accent": "#263A4D"
+      },
+      "summary": "Snowvale has lived in peace ever since the last wolf was hunted down — but with the wolves went the people's dreams, and they've slept without dreaming for years. When Nadia finds a wolf pup hidden on the mountain, she has to choose between the safety everyone wants and something the village forgot it needed.",
+      "readingMinutes": 10,
+      "tags": [
+        "wolf",
+        "dreams",
+        "courage",
+        "nature",
+        "truth"
+      ],
+      "language": "en",
+      "file": "st-014.json"
+    },
+    {
+      "id": "st-015",
+      "title": "The Cartographer of What Will Change",
+      "slug": "the-cartographer-of-what-will-change",
+      "premium": true,
+      "order": 15,
+      "level": "archmage",
+      "cover": {
+        "asset": "CoverCartografo",
+        "accent": "#5E1410"
+      },
+      "summary": "In a city that rebuilds itself every night — streets change places, houses switch neighborhoods — an old cartographer draws maps of what the city will become tomorrow. When he falls ill, Vera must inherit the craft. But she discovers that the maps don't predict the change: they cause it. And that the power to decide how the city changes is too heavy for one person alone.",
+      "readingMinutes": 10,
+      "tags": [
+        "city",
+        "change",
+        "power",
+        "responsibility",
+        "choice"
+      ],
+      "language": "en",
+      "file": "st-015.json"
+    },
+    {
+      "id": "st-016",
+      "title": "The Boy Who Kept the Autumn",
+      "slug": "the-boy-who-kept-the-autumn",
+      "premium": true,
+      "order": 16,
+      "level": "apprentice",
+      "cover": {
+        "asset": "CoverOutono",
+        "accent": "#C79A3E"
+      },
+      "summary": "Milo hates that autumn ends, so he learns to keep the leaves from falling. But a season that never turns is a clock that never ticks, and soon the whole valley is trapped in an afternoon that will not end.",
+      "readingMinutes": 8,
+      "tags": [
+        "seasons",
+        "time",
+        "letting go",
+        "courage"
+      ],
+      "language": "en",
+      "file": "st-016.json"
+    },
+    {
+      "id": "st-017",
+      "title": "The Cartomancer's Debt",
+      "slug": "the-cartomancers-debt",
+      "premium": true,
+      "order": 17,
+      "level": "initiate",
+      "cover": {
+        "asset": "CoverCartomante",
+        "accent": "#5E1410"
+      },
+      "summary": "A fortune-teller in the night market reads your future for free — but each reading quietly takes a memory in payment. When Sable trades away too much to learn how her story ends, she has to decide whether a future is worth having if you forget everything that led you there.",
+      "readingMinutes": 9,
+      "tags": [
+        "fortune",
+        "memory",
+        "bargain",
+        "future",
+        "mystery"
+      ],
+      "language": "en",
+      "file": "st-017.json"
+    },
+    {
+      "id": "st-018",
+      "title": "The Bell That Rang for the Sea",
+      "slug": "the-bell-that-rang-for-the-sea",
+      "premium": true,
+      "order": 18,
+      "level": "conjurer",
+      "cover": {
+        "asset": "CoverSino",
+        "accent": "#263A4D"
+      },
+      "summary": "Beneath the harbor of Saltmarrow lies a drowned town, and a bell that still rings on stormy nights. When Wick learns the bell can call the drowned back to shore, he wants to ring it for his lost father — until he understands what comes back is not who went under.",
+      "readingMinutes": 10,
+      "tags": [
+        "sea",
+        "grief",
+        "folklore",
+        "family",
+        "letting go"
+      ],
+      "language": "en",
+      "file": "st-018.json"
+    },
+    {
+      "id": "st-019",
+      "title": "The Girl Who Counted Crows",
+      "slug": "the-girl-who-counted-crows",
+      "premium": true,
+      "order": 19,
+      "level": "conjurer",
+      "cover": {
+        "asset": "CoverCorvos",
+        "accent": "#4A5A3C"
+      },
+      "summary": "The crows of Blackfen carry away the secrets people whisper, and no one dares count them. When Junia counts the whole murder to learn one buried secret, she opens a door she was never meant to open — and learns some things are hidden to protect the people who hid them.",
+      "readingMinutes": 11,
+      "tags": [
+        "crows",
+        "secrets",
+        "truth",
+        "courage",
+        "folklore"
+      ],
+      "language": "en",
+      "file": "st-019.json"
+    },
+    {
+      "id": "st-020",
+      "title": "The Lantern-Keeper of the Fog",
+      "slug": "the-lantern-keeper-of-the-fog",
+      "premium": true,
+      "order": 20,
+      "level": "archmage",
+      "cover": {
+        "asset": "CoverLanterna",
+        "accent": "#C1352A"
+      },
+      "summary": "On the fog-drowned moor, a keeper carries a lantern that guides lost travelers home — but each soul she saves costs her one of her own memories, and she has kept the light so long she has almost forgotten who she is. When Tam is sent to inherit the lantern, she must decide whether saving strangers is worth erasing yourself.",
+      "readingMinutes": 11,
+      "tags": [
+        "fog",
+        "sacrifice",
+        "memory",
+        "duty",
+        "choice"
+      ],
+      "language": "en",
+      "file": "st-020.json"
+    },
+    {
+      "id": "st-021",
+      "title": "The Boy Who Traded His Voice for Wings",
+      "slug": "the-boy-who-traded-his-voice-for-wings",
+      "premium": true,
+      "order": 21,
+      "level": "apprentice",
+      "cover": {
+        "asset": "CoverAsas",
+        "accent": "#C1352A"
+      },
+      "summary": "Finch hates his small, stammering voice, so he trades it to a sky-peddler for a pair of wings. Flying is everything he dreamed — until the night he sees the fire coming, and has no voice left to warn the people he loves.",
+      "readingMinutes": 10,
+      "tags": [
+        "wings",
+        "voice",
+        "bargain",
+        "courage",
+        "family"
+      ],
+      "language": "en",
+      "file": "st-021.json"
+    },
+    {
+      "id": "st-022",
+      "title": "The Beekeeper of Sorrows",
+      "slug": "the-beekeeper-of-sorrows",
+      "premium": true,
+      "order": 22,
+      "level": "initiate",
+      "cover": {
+        "asset": "CoverApicultora",
+        "accent": "#C79A3E"
+      },
+      "summary": "In the hills above Honeydown lives an old woman whose bees gather sorrow instead of pollen. When Wrenna asks to have her grief taken away for good, she learns that a sorrow removed cleanly takes the love it was made of with it.",
+      "readingMinutes": 9,
+      "tags": [
+        "bees",
+        "grief",
+        "love",
+        "letting go",
+        "folklore"
+      ],
+      "language": "en",
+      "file": "st-022.json"
+    },
+    {
+      "id": "st-023",
+      "title": "The Girl Made of Questions",
+      "slug": "the-girl-made-of-questions",
+      "premium": true,
+      "order": 23,
+      "level": "initiate",
+      "cover": {
+        "asset": "CoverPerguntas",
+        "accent": "#263A4D"
+      },
+      "summary": "In the town of Certain, asking questions is forbidden — the townsfolk trade every 'why' to a hidden thing in exchange for a life without doubt. Ivo can't stop asking, and following her questions down into the dark, she finds out what the town has been feeding, and why.",
+      "readingMinutes": 10,
+      "tags": [
+        "questions",
+        "truth",
+        "conformity",
+        "courage",
+        "mystery"
+      ],
+      "language": "en",
+      "file": "st-023.json"
+    },
+    {
+      "id": "st-024",
+      "title": "The Tide That Kept Score",
+      "slug": "the-tide-that-kept-score",
+      "premium": true,
+      "order": 24,
+      "level": "conjurer",
+      "cover": {
+        "asset": "CoverMare",
+        "accent": "#4A5A3C"
+      },
+      "summary": "On the shore of Gullstrand, the tide gives back whatever you give it — a kindness returns doubled, a cruelty returns doubled too. When Bram uses the tide to take revenge on the boy who wronged him, he learns that a sea that keeps score will keep his, and has to find a way to stop a wave he set in motion.",
+      "readingMinutes": 11,
+      "tags": [
+        "sea",
+        "revenge",
+        "kindness",
+        "consequence",
+        "courage"
+      ],
+      "language": "en",
+      "file": "st-024.json"
+    },
+    {
+      "id": "st-025",
+      "title": "The Last Winter of the Snow Painter",
+      "slug": "the-last-winter-of-the-snow-painter",
+      "premium": true,
+      "order": 25,
+      "level": "archmage",
+      "cover": {
+        "asset": "CoverPintor",
+        "accent": "#5E1410"
+      },
+      "summary": "Every winter is painted into being by a single old artist in a tower at the top of the world. Now he is going blind, and must teach a successor before the last of his sight fails — but Perla learns that the snow was never painted with the eyes, and that the master has been afraid of the wrong loss all along.",
+      "readingMinutes": 11,
+      "tags": [
+        "winter",
+        "art",
+        "blindness",
+        "succession",
+        "choice"
+      ],
+      "language": "en",
+      "file": "st-025.json"
+    },
+    {
+      "id": "st-026",
+      "title": "The Boy Who Swallowed a Star",
+      "slug": "the-boy-who-swallowed-a-star",
+      "premium": true,
+      "order": 26,
+      "level": "apprentice",
+      "cover": {
+        "asset": "CoverEstrela",
+        "accent": "#C79A3E"
+      },
+      "summary": "When a falling star lands in his field, Otto swallows it to keep his wish safe forever. The star lights him from within like a lantern — but a star was never meant to be kept, and to hold it is to slowly burn away, unless he can bear to give his wish to the sky.",
+      "readingMinutes": 11,
+      "tags": [
+        "star",
+        "wish",
+        "letting go",
+        "courage",
+        "night"
+      ],
+      "language": "en",
+      "file": "st-026.json"
+    },
+    {
+      "id": "st-027",
+      "title": "The Menders of Broken Things",
+      "slug": "the-menders-of-broken-things",
+      "premium": true,
+      "order": 27,
+      "level": "apprentice",
+      "cover": {
+        "asset": "CoverConserto",
+        "accent": "#4A5A3C"
+      },
+      "summary": "In a workshop at the end of the lane, an old mender fixes anything you bring him — but he mends the crack, not the memory in it. When Lark brings him the cup her mother broke the day she left, she learns that some cracks are the only proof that something mattered.",
+      "readingMinutes": 10,
+      "tags": [
+        "mending",
+        "memory",
+        "grief",
+        "family",
+        "letting go"
+      ],
+      "language": "en",
+      "file": "st-027.json"
+    },
+    {
+      "id": "st-028",
+      "title": "The Rope Bridge Between Yesterdays",
+      "slug": "the-rope-bridge-between-yesterdays",
+      "premium": true,
+      "order": 28,
+      "level": "initiate",
+      "cover": {
+        "asset": "CoverPonte",
+        "accent": "#263A4D"
+      },
+      "summary": "A rope bridge in the gorge above Mistmoor crosses not to the other side, but to yesterday. Emet crosses it to undo the careless word that lost him his best friend — and learns that the bridge charges a toll, and that you cannot change the past without unmaking who the past made you.",
+      "readingMinutes": 11,
+      "tags": [
+        "time",
+        "regret",
+        "friendship",
+        "consequence",
+        "courage"
+      ],
+      "language": "en",
+      "file": "st-028.json"
+    },
+    {
+      "id": "st-029",
+      "title": "The Girl Who Fed the Dark",
+      "slug": "the-girl-who-fed-the-dark",
+      "premium": true,
+      "order": 29,
+      "level": "conjurer",
+      "cover": {
+        "asset": "CoverEscuro",
+        "accent": "#5E1410"
+      },
+      "summary": "Every night, Sabra feeds the darkness under her bed so it won't grow hungry and take the whole house. But the more she feeds it, the bigger it gets — and she must learn what the dark is truly starving for, and why feeding a fear only makes it grow.",
+      "readingMinutes": 10,
+      "tags": [
+        "darkness",
+        "fear",
+        "courage",
+        "family",
+        "folklore"
+      ],
+      "language": "en",
+      "file": "st-029.json"
+    },
+    {
+      "id": "st-030",
+      "title": "The Gardener of Forgotten Graves",
+      "slug": "the-gardener-of-forgotten-graves",
+      "premium": true,
+      "order": 30,
+      "level": "archmage",
+      "cover": {
+        "asset": "CoverJardineiro",
+        "accent": "#C1352A"
+      },
+      "summary": "An old gardener tends the graves no one visits anymore, keeping the forgotten dead company. When Yara learns that a grave, once remembered again, can call its sleeper partway back, she wants to wake her grandmother — and must weigh what the living owe the dead against what the dead need from the living.",
+      "readingMinutes": 11,
+      "tags": [
+        "graves",
+        "memory",
+        "grief",
+        "duty",
+        "letting go"
+      ],
+      "language": "en",
+      "file": "st-030.json"
+    },
+    {
+      "id": "st-031",
+      "title": "The Boy Who Painted Lies",
+      "slug": "the-boy-who-painted-lies",
+      "premium": true,
+      "order": 31,
+      "level": "apprentice",
+      "cover": {
+        "asset": "CoverPincel",
+        "accent": "#C79A3E"
+      },
+      "summary": "Tobin is given a brush that makes whatever he paints become real. He uses it to paint small convenient lies — a finished chore, an unbroken vase — until the lies he paints start changing the world in ways he never meant, and he must paint the hardest thing of all: the truth.",
+      "readingMinutes": 11,
+      "tags": [
+        "art",
+        "honesty",
+        "consequence",
+        "courage",
+        "magic"
+      ],
+      "language": "en",
+      "file": "st-031.json"
+    },
+    {
+      "id": "st-032",
+      "title": "The Innkeeper at the Crossroads",
+      "slug": "the-innkeeper-at-the-crossroads",
+      "premium": true,
+      "order": 32,
+      "level": "initiate",
+      "cover": {
+        "asset": "CoverEstalagem",
+        "accent": "#5E1410"
+      },
+      "summary": "At an inn where the four roads meet, travelers pay for their bed with a true story of their lives. When Pia tries to cheat the innkeeper with a lie, she learns that the inn takes something real in exchange for every falsehood — and that the tally always comes due.",
+      "readingMinutes": 12,
+      "tags": [
+        "inn",
+        "honesty",
+        "stories",
+        "consequence",
+        "mystery"
+      ],
+      "language": "en",
+      "file": "st-032.json"
+    },
+    {
+      "id": "st-033",
+      "title": "The Girl Who Kept Everyone's Secrets",
+      "slug": "the-girl-who-kept-everyones-secrets",
+      "premium": true,
+      "order": 33,
+      "level": "initiate",
+      "cover": {
+        "asset": "CoverSegredos",
+        "accent": "#263A4D"
+      },
+      "summary": "Everyone trusts Nessa with their secrets, and she never tells a soul — but each secret settles inside her like a stone, and she is slowly being crushed by the weight of what she carries alone. She must learn the difference between keeping a trust and carrying a burden no one was meant to bear by themselves.",
+      "readingMinutes": 10,
+      "tags": [
+        "secrets",
+        "trust",
+        "burden",
+        "friendship",
+        "courage"
+      ],
+      "language": "en",
+      "file": "st-033.json"
+    },
+    {
+      "id": "st-034",
+      "title": "The Weight of Gold",
+      "slug": "the-weight-of-gold",
+      "premium": true,
+      "order": 34,
+      "level": "conjurer",
+      "cover": {
+        "asset": "CoverOuro",
+        "accent": "#4A5A3C"
+      },
+      "summary": "In the mountain mine above Coldhollow, the gold weighs according to the greed of whoever takes it — a little for the needy, a crushing burden for the grasping. When Doran's village falls on hard times, he goes down for just enough, and learns that the mine measures not how much you take, but why.",
+      "readingMinutes": 10,
+      "tags": [
+        "gold",
+        "greed",
+        "generosity",
+        "mountain",
+        "choice"
+      ],
+      "language": "en",
+      "file": "st-034.json"
+    },
+    {
+      "id": "st-035",
+      "title": "The Mapmaker Who Drew the Edge of the World",
+      "slug": "the-mapmaker-who-drew-the-edge-of-the-world",
+      "premium": true,
+      "order": 35,
+      "level": "archmage",
+      "cover": {
+        "asset": "CoverBorda",
+        "accent": "#C1352A"
+      },
+      "summary": "Wenna inherits the great task of mapping the world to its very edge, where the land ends and the unknown begins. Every mapmaker before her either turned back too soon out of fear, or walked over the edge chasing what lay beyond. She must learn that true courage is not always going further — sometimes it is knowing exactly where to stop.",
+      "readingMinutes": 11,
+      "tags": [
+        "maps",
+        "courage",
+        "the unknown",
+        "wisdom",
+        "choice"
+      ],
+      "language": "en",
+      "file": "st-035.json"
+    },
+    {
+      "id": "st-036",
+      "title": "The Boy Who Collected Echoes",
+      "slug": "the-boy-who-collected-echoes",
+      "premium": true,
+      "order": 36,
+      "level": "apprentice",
+      "cover": {
+        "asset": "CoverEcos",
+        "accent": "#C79A3E"
+      },
+      "summary": "Milo learns to catch echoes in seashells and keep them forever. When he catches the echo of the first kind words anyone ever said to him, he replays them so often he stops hearing anything new — and must learn that a kept echo is not the same as a living voice.",
+      "readingMinutes": 10,
+      "tags": [
+        "echoes",
+        "praise",
+        "living in the present",
+        "courage",
+        "sound"
+      ],
+      "language": "en",
+      "file": "st-036.json"
+    },
+    {
+      "id": "st-037",
+      "title": "The Girl Who Was Afraid to Begin",
+      "slug": "the-girl-who-was-afraid-to-begin",
+      "premium": true,
+      "order": 37,
+      "level": "apprentice",
+      "cover": {
+        "asset": "CoverComeco",
+        "accent": "#4A5A3C"
+      },
+      "summary": "Wren wants to make something beautiful, but she is so afraid of doing it badly that she never begins at all. When a strange gardener gives her a seed that will only grow if planted imperfectly, she learns that a flawed beginning is the only kind there is — and that nothing finished was ever started perfectly.",
+      "readingMinutes": 10,
+      "tags": [
+        "perfectionism",
+        "beginning",
+        "courage",
+        "creativity",
+        "growth"
+      ],
+      "language": "en",
+      "file": "st-037.json"
+    },
+    {
+      "id": "st-038",
+      "title": "The Ferryman Who Counted Debts",
+      "slug": "the-ferryman-who-counted-debts",
+      "premium": true,
+      "order": 38,
+      "level": "conjurer",
+      "cover": {
+        "asset": "CoverBarqueiro",
+        "accent": "#263A4D"
+      },
+      "summary": "The ferryman of the black river takes no coins — he takes favors, owed and remembered, and he never forgets a debt. When Isla crosses without being able to pay, she becomes bound to him, and learns that a kindness given to be repaid is a chain, while a kindness given freely is the only thing that sets you free.",
+      "readingMinutes": 11,
+      "tags": [
+        "ferryman",
+        "debt",
+        "kindness",
+        "freedom",
+        "folklore"
+      ],
+      "language": "en",
+      "file": "st-038.json"
+    },
+    {
+      "id": "st-039",
+      "title": "The Village That Shared One Heart",
+      "slug": "the-village-that-shared-one-heart",
+      "premium": true,
+      "order": 39,
+      "level": "conjurer",
+      "cover": {
+        "asset": "CoverCoracao",
+        "accent": "#5E1410"
+      },
+      "summary": "In Everfeel, everyone feels what everyone else feels — no one is ever alone in a sorrow or a joy. But Mira discovers that a village that shares every feeling can never let anyone feel a hard thing all the way through, and learns that some feelings have to be felt alone before they can be shared.",
+      "readingMinutes": 10,
+      "tags": [
+        "empathy",
+        "feelings",
+        "solitude",
+        "growth",
+        "folklore"
+      ],
+      "language": "en",
+      "file": "st-039.json"
+    },
+    {
+      "id": "st-040",
+      "title": "The Keeper of the Last Question",
+      "slug": "the-keeper-of-the-last-question",
+      "premium": true,
+      "order": 40,
+      "level": "archmage",
+      "cover": {
+        "asset": "CoverBorda2",
+        "accent": "#C1352A"
+      },
+      "summary": "Deep beneath the mountain sleeps a question so powerful that answering it would remake the world — or unmake it. Tamsin inherits the task of guarding it, and a lifetime of resisting the urge to know, and must decide whether some things are better left unanswered, and what it costs to guard a door you long to open.",
+      "readingMinutes": 11,
+      "tags": [
+        "question",
+        "knowledge",
+        "restraint",
+        "duty",
+        "wisdom"
+      ],
+      "language": "en",
+      "file": "st-040.json"
+    },
+    {
+      "id": "st-041",
+      "title": "The Boy Who Would Not Share the Sun",
+      "slug": "the-boy-who-would-not-share-the-sun",
+      "premium": true,
+      "order": 41,
+      "level": "apprentice",
+      "cover": {
+        "asset": "CoverSol",
+        "accent": "#C79A3E"
+      },
+      "summary": "Bram catches the warm morning sun in a glass jar so he can have its light and warmth all to himself, always. But the sun was meant to be shared, and as he hoards it, the whole valley grows cold and grey — and Bram must learn that some things are only warm when they are given away.",
+      "readingMinutes": 10,
+      "tags": [
+        "sun",
+        "sharing",
+        "greed",
+        "warmth",
+        "courage"
+      ],
+      "language": "en",
+      "file": "st-041.json"
+    },
+    {
+      "id": "st-042",
+      "title": "The Weathervane Girl",
+      "slug": "the-weathervane-girl",
+      "premium": true,
+      "order": 42,
+      "level": "initiate",
+      "cover": {
+        "asset": "CoverCataVento",
+        "accent": "#4A5A3C"
+      },
+      "summary": "Pip can feel what everyone around her wants, and she always turns to point that way, like a weathervane in the wind — agreeable, helpful, never any trouble. But a girl who always points where others want has no direction of her own, and Pip must find out what she wants before she spins herself away entirely.",
+      "readingMinutes": 10,
+      "tags": [
+        "identity",
+        "people-pleasing",
+        "self",
+        "courage",
+        "direction"
+      ],
+      "language": "en",
+      "file": "st-042.json"
+    },
+    {
+      "id": "st-043",
+      "title": "The Lender of Hours",
+      "slug": "the-lender-of-hours",
+      "premium": true,
+      "order": 43,
+      "level": "initiate",
+      "cover": {
+        "asset": "CoverHoras",
+        "accent": "#263A4D"
+      },
+      "summary": "A quiet lender in the night market rents out extra hours — awake, to those who never have enough time. Nolan borrows more and more to finish everything he thinks he must, and learns that the hours must be paid back with rest, and that a life spent borrowing time is a life that never arrives.",
+      "readingMinutes": 10,
+      "tags": [
+        "time",
+        "rest",
+        "balance",
+        "consequence",
+        "mystery"
+      ],
+      "language": "en",
+      "file": "st-043.json"
+    },
+    {
+      "id": "st-044",
+      "title": "The Puppet Who Cut Her Strings",
+      "slug": "the-puppet-who-cut-her-strings",
+      "premium": true,
+      "order": 44,
+      "level": "conjurer",
+      "cover": {
+        "asset": "CoverMarionete",
+        "accent": "#5E1410"
+      },
+      "summary": "A wooden puppet named Sela wakes one night to find she is alive, and the first thing she does is cut the strings that let her master move her. But free of the strings, she cannot move at all — and must learn that the strings were never only a leash, and that true freedom is not having no strings, but choosing your own.",
+      "readingMinutes": 9,
+      "tags": [
+        "freedom",
+        "choice",
+        "puppet",
+        "growth",
+        "folklore"
+      ],
+      "language": "en",
+      "file": "st-044.json"
+    },
+    {
+      "id": "st-045",
+      "title": "The Woman Who Watered Stone",
+      "slug": "the-woman-who-watered-stone",
+      "premium": true,
+      "order": 45,
+      "level": "archmage",
+      "cover": {
+        "asset": "CoverPedra",
+        "accent": "#C1352A"
+      },
+      "summary": "For forty years, old Marda has watered a bare grey stone in her garden every single day, waiting for it to bloom. The village calls her mad. But when young Tomas comes to learn from her, he discovers the truth is stranger and wiser than madness — and learns the hard difference between faithful patience and stubborn folly.",
+      "readingMinutes": 10,
+      "tags": [
+        "patience",
+        "faith",
+        "wisdom",
+        "persistence",
+        "folklore"
+      ],
+      "language": "en",
+      "file": "st-045.json"
+    },
+    {
+      "id": "st-046",
+      "title": "The Boy Who Buried His Fear",
+      "slug": "the-boy-who-buried-his-fear",
+      "premium": true,
+      "order": 46,
+      "level": "apprentice",
+      "cover": {
+        "asset": "CoverBau",
+        "accent": "#C79A3E"
+      },
+      "summary": "Whenever Rafe is afraid, he locks the fear in a chest and buries it in the garden, so he never has to feel it. But fears buried in the dark do not die — they grow, fed by never being faced, until the garden is full of monsters, and Rafe must learn that the only way past a fear is through it.",
+      "readingMinutes": 10,
+      "tags": [
+        "fear",
+        "courage",
+        "facing things",
+        "growth",
+        "folklore"
+      ],
+      "language": "en",
+      "file": "st-046.json"
+    },
+    {
+      "id": "st-047",
+      "title": "The Girl Who Gave Away Her Reflection",
+      "slug": "the-girl-who-gave-away-her-reflection",
+      "premium": true,
+      "order": 47,
+      "level": "initiate",
+      "cover": {
+        "asset": "CoverReflexo",
+        "accent": "#4A5A3C"
+      },
+      "summary": "Elsie dislikes her own reflection so much that she trades it away to a mirror-merchant, so she never has to see herself again. But a person without a reflection slowly forgets who she is, and Elsie must win back the face she gave away — and learn to meet her own eyes with kindness.",
+      "readingMinutes": 10,
+      "tags": [
+        "self-image",
+        "identity",
+        "self-acceptance",
+        "courage",
+        "mirror"
+      ],
+      "language": "en",
+      "file": "st-047.json"
+    },
+    {
+      "id": "st-048",
+      "title": "The Keeper of the Empty Chair",
+      "slug": "the-keeper-of-the-empty-chair",
+      "premium": true,
+      "order": 48,
+      "level": "archmage",
+      "cover": {
+        "asset": "CoverCadeira",
+        "accent": "#263A4D"
+      },
+      "summary": "Old Bertram keeps a chair by the fire always empty, always ready, for a son who sailed away long ago and never returned. For thirty years he has waited, and stopped living, holding the door for a ship that may never come. A young girl helps him learn the hardest thing about hope: how to keep it without letting it keep you from your life.",
+      "readingMinutes": 11,
+      "tags": [
+        "hope",
+        "waiting",
+        "grief",
+        "living",
+        "wisdom"
+      ],
+      "language": "en",
+      "file": "st-048.json"
+    },
+    {
+      "id": "st-049",
+      "title": "The Roadmender Nobody Thanked",
+      "slug": "the-roadmender-nobody-thanked",
+      "premium": true,
+      "order": 49,
+      "level": "archmage",
+      "cover": {
+        "asset": "CoverEstrada",
+        "accent": "#5E1410"
+      },
+      "summary": "Old Hesper mends the mountain roads that everyone travels and no one thinks about, filling the holes and shoring the bridges in the dark before dawn. When she grows too old to continue and no one will take up the work, a boy learns why the invisible work that holds up the world is the most important work of all — and the hardest to honor.",
+      "readingMinutes": 10,
+      "tags": [
+        "invisible work",
+        "service",
+        "gratitude",
+        "responsibility",
+        "wisdom"
+      ],
+      "language": "en",
+      "file": "st-049.json"
+    },
+    {
+      "id": "st-050",
+      "title": "The Last Story in the Book",
+      "slug": "the-last-story-in-the-book",
+      "premium": true,
+      "order": 50,
+      "level": "archmage",
+      "cover": {
+        "asset": "CoverLivro",
+        "accent": "#C1352A"
+      },
+      "summary": "A girl finds an old book of strange and beautiful stories, and reads them one by one, each teaching her something true. But when she reaches the very last story, she discovers it is about a reader who reaches the last story — about her — and learns that the stories were never only meant to be read, but to be lived, and passed on.",
+      "readingMinutes": 10,
+      "tags": [
+        "stories",
+        "reading",
+        "wisdom",
+        "meaning",
+        "endings"
+      ],
+      "language": "en",
+      "file": "st-050.json"
+    }
+  ]
+}
