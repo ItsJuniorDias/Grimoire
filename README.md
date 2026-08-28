@@ -8,10 +8,6 @@
 
 <br />
 
-<img src="docs/screenshots/01-onboarding.png" alt="Grimoire onboarding" width="280" />
-
-<br /><br />
-
 ![Platform](https://img.shields.io/badge/platform-iOS-black.svg)
 ![Swift](https://img.shields.io/badge/Swift-5-orange.svg)
 ![Xcode](https://img.shields.io/badge/Xcode-15%2B-blue.svg)
@@ -19,6 +15,39 @@
 </div>
 
 ---
+
+## Screenshots
+
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <img src="docs/screenshots/01-onboarding.png" alt="Onboarding" width="240" /><br />
+      <sub><b>Onboarding</b><br />From Apprentice to Archmage</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="docs/screenshots/02-home.png" alt="Home" width="240" /><br />
+      <sub><b>Home</b><br />Featured story & tiers</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="docs/screenshots/03-story-detail.png" alt="Story detail" width="240" /><br />
+      <sub><b>Story detail</b><br />Chapters & metadata</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" width="33%">
+      <img src="docs/screenshots/04-reader.png" alt="Reader" width="240" /><br />
+      <sub><b>Reader</b><br />Built for the dark</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="docs/screenshots/05-favorites.png" alt="Favorites" width="240" /><br />
+      <sub><b>Favorites</b><br />Everything you saved</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="docs/screenshots/06-pro.png" alt="Grimoire Pro" width="240" /><br />
+      <sub><b>Grimoire Pro</b><br />Unlock the whole grimoire</sub>
+    </td>
+  </tr>
+</table>
 
 ## About
 
@@ -35,39 +64,6 @@ The app opens with three free stories. The full grimoire is unlocked through **G
 - 🎧 **AI-narrated audio** (in development, powered by the [Grimoire Narration Pipeline](https://github.com/ItsJuniorDias))
 - ⭐ **Free to start** — three stories on the house, the rest through Grimoire Pro
 - 🚫 **No ads, ever** — the reading is never interrupted
-
-## Screenshots
-
-<table>
-  <tr>
-    <td align="center" width="33%">
-      <img src="docs/screenshots/02-home.png" alt="Home" width="220" /><br />
-      <sub><b>Home</b><br />Featured story & tiers</sub>
-    </td>
-    <td align="center" width="33%">
-      <img src="docs/screenshots/03-story-detail.png" alt="Story detail" width="220" /><br />
-      <sub><b>Story detail</b><br />Chapters & metadata</sub>
-    </td>
-    <td align="center" width="33%">
-      <img src="docs/screenshots/04-reader.png" alt="Reader" width="220" /><br />
-      <sub><b>Reader</b><br />Built for the dark</sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="33%">
-      <img src="docs/screenshots/05-favorites.png" alt="Favorites" width="220" /><br />
-      <sub><b>Favorites</b><br />Everything you saved</sub>
-    </td>
-    <td align="center" width="33%">
-      <img src="docs/screenshots/06-pro.png" alt="Grimoire Pro" width="220" /><br />
-      <sub><b>Grimoire Pro</b><br />Unlock the whole grimoire</sub>
-    </td>
-    <td align="center" width="33%">
-      <img src="docs/screenshots/01-onboarding.png" alt="Onboarding" width="220" /><br />
-      <sub><b>Onboarding</b><br />From Apprentice to Archmage</sub>
-    </td>
-  </tr>
-</table>
 
 ## The Story System
 
