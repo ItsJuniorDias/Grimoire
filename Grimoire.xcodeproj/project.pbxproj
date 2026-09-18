@@ -13,6 +13,608 @@
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
 		83144CC8303ED1B200A4ADD5 /* Exceptions for "Grimoire" folder in "Grimoire" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			assetTagsByRelativePath = {
+				"Content/audio/st-001-ch1.mp3" = (
+					"narration-st-001",
+				);
+				"Content/audio/st-001-ch2.mp3" = (
+					"narration-st-001",
+				);
+				"Content/audio/st-001-ch3.mp3" = (
+					"narration-st-001",
+				);
+				"Content/audio/st-002-ch1.mp3" = (
+					"narration-st-002",
+				);
+				"Content/audio/st-002-ch2.mp3" = (
+					"narration-st-002",
+				);
+				"Content/audio/st-002-ch3.mp3" = (
+					"narration-st-002",
+				);
+				"Content/audio/st-003-ch1.mp3" = (
+					"narration-st-003",
+				);
+				"Content/audio/st-003-ch2.mp3" = (
+					"narration-st-003",
+				);
+				"Content/audio/st-003-ch3.mp3" = (
+					"narration-st-003",
+				);
+				"Content/audio/st-004-ch1.mp3" = (
+					"narration-st-004",
+				);
+				"Content/audio/st-004-ch2.mp3" = (
+					"narration-st-004",
+				);
+				"Content/audio/st-004-ch3.mp3" = (
+					"narration-st-004",
+				);
+				"Content/audio/st-005-ch1.mp3" = (
+					"narration-st-005",
+				);
+				"Content/audio/st-005-ch2.mp3" = (
+					"narration-st-005",
+				);
+				"Content/audio/st-005-ch3.mp3" = (
+					"narration-st-005",
+				);
+				"Content/audio/st-006-ch1.mp3" = (
+					"narration-st-006",
+				);
+				"Content/audio/st-006-ch2.mp3" = (
+					"narration-st-006",
+				);
+				"Content/audio/st-006-ch3.mp3" = (
+					"narration-st-006",
+				);
+				"Content/audio/st-007-ch1.mp3" = (
+					"narration-st-007",
+				);
+				"Content/audio/st-007-ch2.mp3" = (
+					"narration-st-007",
+				);
+				"Content/audio/st-007-ch3.mp3" = (
+					"narration-st-007",
+				);
+				"Content/audio/st-008-ch1.mp3" = (
+					"narration-st-008",
+				);
+				"Content/audio/st-008-ch2.mp3" = (
+					"narration-st-008",
+				);
+				"Content/audio/st-008-ch3.mp3" = (
+					"narration-st-008",
+				);
+				"Content/audio/st-009-ch1.mp3" = (
+					"narration-st-009",
+				);
+				"Content/audio/st-009-ch2.mp3" = (
+					"narration-st-009",
+				);
+				"Content/audio/st-009-ch3.mp3" = (
+					"narration-st-009",
+				);
+				"Content/audio/st-010-ch1.mp3" = (
+					"narration-st-010",
+				);
+				"Content/audio/st-010-ch2.mp3" = (
+					"narration-st-010",
+				);
+				"Content/audio/st-010-ch3.mp3" = (
+					"narration-st-010",
+				);
+				"Content/audio/st-011-ch1.mp3" = (
+					"narration-st-011",
+				);
+				"Content/audio/st-011-ch2.mp3" = (
+					"narration-st-011",
+				);
+				"Content/audio/st-011-ch3.mp3" = (
+					"narration-st-011",
+				);
+				"Content/audio/st-012-ch1.mp3" = (
+					"narration-st-012",
+				);
+				"Content/audio/st-012-ch2.mp3" = (
+					"narration-st-012",
+				);
+				"Content/audio/st-012-ch3.mp3" = (
+					"narration-st-012",
+				);
+				"Content/audio/st-013-ch1.mp3" = (
+					"narration-st-013",
+				);
+				"Content/audio/st-013-ch2.mp3" = (
+					"narration-st-013",
+				);
+				"Content/audio/st-013-ch3.mp3" = (
+					"narration-st-013",
+				);
+				"Content/audio/st-014-ch1.mp3" = (
+					"narration-st-014",
+				);
+				"Content/audio/st-014-ch2.mp3" = (
+					"narration-st-014",
+				);
+				"Content/audio/st-014-ch3.mp3" = (
+					"narration-st-014",
+				);
+				"Content/audio/st-015-ch1.mp3" = (
+					"narration-st-015",
+				);
+				"Content/audio/st-015-ch2.mp3" = (
+					"narration-st-015",
+				);
+				"Content/audio/st-015-ch3.mp3" = (
+					"narration-st-015",
+				);
+				"Content/audio/st-016-ch1.mp3" = (
+					"narration-st-016",
+				);
+				"Content/audio/st-016-ch2.mp3" = (
+					"narration-st-016",
+				);
+				"Content/audio/st-016-ch3.mp3" = (
+					"narration-st-016",
+				);
+				"Content/audio/st-017-ch1.mp3" = (
+					"narration-st-017",
+				);
+				"Content/audio/st-017-ch2.mp3" = (
+					"narration-st-017",
+				);
+				"Content/audio/st-017-ch3.mp3" = (
+					"narration-st-017",
+				);
+				"Content/audio/st-018-ch1.mp3" = (
+					"narration-st-018",
+				);
+				"Content/audio/st-018-ch2.mp3" = (
+					"narration-st-018",
+				);
+				"Content/audio/st-018-ch3.mp3" = (
+					"narration-st-018",
+				);
+				"Content/audio/st-019-ch1.mp3" = (
+					"narration-st-019",
+				);
+				"Content/audio/st-019-ch2.mp3" = (
+					"narration-st-019",
+				);
+				"Content/audio/st-019-ch3.mp3" = (
+					"narration-st-019",
+				);
+				"Content/audio/st-020-ch1.mp3" = (
+					"narration-st-020",
+				);
+				"Content/audio/st-020-ch2.mp3" = (
+					"narration-st-020",
+				);
+				"Content/audio/st-020-ch3.mp3" = (
+					"narration-st-020",
+				);
+				"Content/audio/st-021-ch1.mp3" = (
+					"narration-st-021",
+				);
+				"Content/audio/st-021-ch2.mp3" = (
+					"narration-st-021",
+				);
+				"Content/audio/st-021-ch3.mp3" = (
+					"narration-st-021",
+				);
+				"Content/audio/st-022-ch1.mp3" = (
+					"narration-st-022",
+				);
+				"Content/audio/st-022-ch2.mp3" = (
+					"narration-st-022",
+				);
+				"Content/audio/st-022-ch3.mp3" = (
+					"narration-st-022",
+				);
+				"Content/audio/st-023-ch1.mp3" = (
+					"narration-st-023",
+				);
+				"Content/audio/st-023-ch2.mp3" = (
+					"narration-st-023",
+				);
+				"Content/audio/st-023-ch3.mp3" = (
+					"narration-st-023",
+				);
+				"Content/audio/st-024-ch1.mp3" = (
+					"narration-st-024",
+				);
+				"Content/audio/st-024-ch2.mp3" = (
+					"narration-st-024",
+				);
+				"Content/audio/st-024-ch3.mp3" = (
+					"narration-st-024",
+				);
+				"Content/audio/st-025-ch1.mp3" = (
+					"narration-st-025",
+				);
+				"Content/audio/st-025-ch2.mp3" = (
+					"narration-st-025",
+				);
+				"Content/audio/st-025-ch3.mp3" = (
+					"narration-st-025",
+				);
+				"Content/audio/st-026-ch1.mp3" = (
+					"narration-st-026",
+				);
+				"Content/audio/st-026-ch2.mp3" = (
+					"narration-st-026",
+				);
+				"Content/audio/st-026-ch3.mp3" = (
+					"narration-st-026",
+				);
+				"Content/audio/st-027-ch1.mp3" = (
+					"narration-st-027",
+				);
+				"Content/audio/st-027-ch2.mp3" = (
+					"narration-st-027",
+				);
+				"Content/audio/st-027-ch3.mp3" = (
+					"narration-st-027",
+				);
+				"Content/audio/st-028-ch1.mp3" = (
+					"narration-st-028",
+				);
+				"Content/audio/st-028-ch2.mp3" = (
+					"narration-st-028",
+				);
+				"Content/audio/st-028-ch3.mp3" = (
+					"narration-st-028",
+				);
+				"Content/audio/st-029-ch1.mp3" = (
+					"narration-st-029",
+				);
+				"Content/audio/st-029-ch2.mp3" = (
+					"narration-st-029",
+				);
+				"Content/audio/st-029-ch3.mp3" = (
+					"narration-st-029",
+				);
+				"Content/audio/st-030-ch1.mp3" = (
+					"narration-st-030",
+				);
+				"Content/audio/st-030-ch2.mp3" = (
+					"narration-st-030",
+				);
+				"Content/audio/st-030-ch3.mp3" = (
+					"narration-st-030",
+				);
+				"Content/audio/st-031-ch1.mp3" = (
+					"narration-st-031",
+				);
+				"Content/audio/st-031-ch2.mp3" = (
+					"narration-st-031",
+				);
+				"Content/audio/st-031-ch3.mp3" = (
+					"narration-st-031",
+				);
+				"Content/audio/st-032-ch1.mp3" = (
+					"narration-st-032",
+				);
+				"Content/audio/st-032-ch2.mp3" = (
+					"narration-st-032",
+				);
+				"Content/audio/st-032-ch3.mp3" = (
+					"narration-st-032",
+				);
+				"Content/audio/st-033-ch1.mp3" = (
+					"narration-st-033",
+				);
+				"Content/audio/st-033-ch2.mp3" = (
+					"narration-st-033",
+				);
+				"Content/audio/st-033-ch3.mp3" = (
+					"narration-st-033",
+				);
+				"Content/audio/st-034-ch1.mp3" = (
+					"narration-st-034",
+				);
+				"Content/audio/st-034-ch2.mp3" = (
+					"narration-st-034",
+				);
+				"Content/audio/st-034-ch3.mp3" = (
+					"narration-st-034",
+				);
+				"Content/audio/st-035-ch1.mp3" = (
+					"narration-st-035",
+				);
+				"Content/audio/st-035-ch2.mp3" = (
+					"narration-st-035",
+				);
+				"Content/audio/st-035-ch3.mp3" = (
+					"narration-st-035",
+				);
+				"Content/audio/st-036-ch1.mp3" = (
+					"narration-st-036",
+				);
+				"Content/audio/st-036-ch2.mp3" = (
+					"narration-st-036",
+				);
+				"Content/audio/st-036-ch3.mp3" = (
+					"narration-st-036",
+				);
+				"Content/audio/st-037-ch1.mp3" = (
+					"narration-st-037",
+				);
+				"Content/audio/st-037-ch2.mp3" = (
+					"narration-st-037",
+				);
+				"Content/audio/st-037-ch3.mp3" = (
+					"narration-st-037",
+				);
+				"Content/audio/st-038-ch1.mp3" = (
+					"narration-st-038",
+				);
+				"Content/audio/st-038-ch2.mp3" = (
+					"narration-st-038",
+				);
+				"Content/audio/st-038-ch3.mp3" = (
+					"narration-st-038",
+				);
+				"Content/audio/st-039-ch1.mp3" = (
+					"narration-st-039",
+				);
+				"Content/audio/st-039-ch2.mp3" = (
+					"narration-st-039",
+				);
+				"Content/audio/st-039-ch3.mp3" = (
+					"narration-st-039",
+				);
+				"Content/audio/st-040-ch1.mp3" = (
+					"narration-st-040",
+				);
+				"Content/audio/st-040-ch2.mp3" = (
+					"narration-st-040",
+				);
+				"Content/audio/st-040-ch3.mp3" = (
+					"narration-st-040",
+				);
+				"Content/audio/st-041-ch1.mp3" = (
+					"narration-st-041",
+				);
+				"Content/audio/st-041-ch2.mp3" = (
+					"narration-st-041",
+				);
+				"Content/audio/st-041-ch3.mp3" = (
+					"narration-st-041",
+				);
+				"Content/audio/st-042-ch1.mp3" = (
+					"narration-st-042",
+				);
+				"Content/audio/st-042-ch2.mp3" = (
+					"narration-st-042",
+				);
+				"Content/audio/st-042-ch3.mp3" = (
+					"narration-st-042",
+				);
+				"Content/audio/st-043-ch1.mp3" = (
+					"narration-st-043",
+				);
+				"Content/audio/st-043-ch2.mp3" = (
+					"narration-st-043",
+				);
+				"Content/audio/st-043-ch3.mp3" = (
+					"narration-st-043",
+				);
+				"Content/audio/st-044-ch1.mp3" = (
+					"narration-st-044",
+				);
+				"Content/audio/st-044-ch2.mp3" = (
+					"narration-st-044",
+				);
+				"Content/audio/st-044-ch3.mp3" = (
+					"narration-st-044",
+				);
+				"Content/audio/st-045-ch1.mp3" = (
+					"narration-st-045",
+				);
+				"Content/audio/st-045-ch2.mp3" = (
+					"narration-st-045",
+				);
+				"Content/audio/st-045-ch3.mp3" = (
+					"narration-st-045",
+				);
+				"Content/audio/st-046-ch1.mp3" = (
+					"narration-st-046",
+				);
+				"Content/audio/st-046-ch2.mp3" = (
+					"narration-st-046",
+				);
+				"Content/audio/st-046-ch3.mp3" = (
+					"narration-st-046",
+				);
+				"Content/audio/st-047-ch1.mp3" = (
+					"narration-st-047",
+				);
+				"Content/audio/st-047-ch2.mp3" = (
+					"narration-st-047",
+				);
+				"Content/audio/st-047-ch3.mp3" = (
+					"narration-st-047",
+				);
+				"Content/audio/st-048-ch1.mp3" = (
+					"narration-st-048",
+				);
+				"Content/audio/st-048-ch2.mp3" = (
+					"narration-st-048",
+				);
+				"Content/audio/st-048-ch3.mp3" = (
+					"narration-st-048",
+				);
+				"Content/audio/st-049-ch1.mp3" = (
+					"narration-st-049",
+				);
+				"Content/audio/st-049-ch2.mp3" = (
+					"narration-st-049",
+				);
+				"Content/audio/st-049-ch3.mp3" = (
+					"narration-st-049",
+				);
+				"Content/audio/st-050-ch1.mp3" = (
+					"narration-st-050",
+				);
+				"Content/audio/st-050-ch2.mp3" = (
+					"narration-st-050",
+				);
+				"Content/audio/st-050-ch3.mp3" = (
+					"narration-st-050",
+				);
+				"Content/videos/cover-apicultora.mp4" = (
+					"video-cover-apicultora",
+				);
+				"Content/videos/cover-asas.mp4" = (
+					"video-cover-asas",
+				);
+				"Content/videos/cover-barqueiro.mp4" = (
+					"video-cover-barqueiro",
+				);
+				"Content/videos/cover-bau.mp4" = (
+					"video-cover-bau",
+				);
+				"Content/videos/cover-biblioteca.mp4" = (
+					"video-cover-biblioteca",
+				);
+				"Content/videos/cover-borda-2.mp4" = (
+					"video-cover-borda-2",
+				);
+				"Content/videos/cover-borda.mp4" = (
+					"video-cover-borda",
+				);
+				"Content/videos/cover-cadeira.mp4" = (
+					"video-cover-cadeira",
+				);
+				"Content/videos/cover-cartografo.mp4" = (
+					"video-cover-cartografo",
+				);
+				"Content/videos/cover-cartomante.mp4" = (
+					"video-cover-cartomante",
+				);
+				"Content/videos/cover-casa.mp4" = (
+					"video-cover-casa",
+				);
+				"Content/videos/cover-cata-vento.mp4" = (
+					"video-cover-cata-vento",
+				);
+				"Content/videos/cover-comeco.mp4" = (
+					"video-cover-comeco",
+				);
+				"Content/videos/cover-conserto.mp4" = (
+					"video-cover-conserto",
+				);
+				"Content/videos/cover-coracao.mp4" = (
+					"video-cover-coracao",
+				);
+				"Content/videos/cover-corvos.mp4" = (
+					"video-cover-corvos",
+				);
+				"Content/videos/cover-ecos.mp4" = (
+					"video-cover-ecos",
+				);
+				"Content/videos/cover-escuro.mp4" = (
+					"video-cover-escuro",
+				);
+				"Content/videos/cover-espelho.mp4" = (
+					"video-cover-espelho",
+				);
+				"Content/videos/cover-estalagem.mp4" = (
+					"video-cover-estalagem",
+				);
+				"Content/videos/cover-estrada.mp4" = (
+					"video-cover-estrada",
+				);
+				"Content/videos/cover-estrela.mp4" = (
+					"video-cover-estrela",
+				);
+				"Content/videos/cover-farol.mp4" = (
+					"video-cover-farol",
+				);
+				"Content/videos/cover-ferro.mp4" = (
+					"video-cover-ferro",
+				);
+				"Content/videos/cover-guardiao.mp4" = (
+					"video-cover-guardiao",
+				);
+				"Content/videos/cover-horas.mp4" = (
+					"video-cover-horas",
+				);
+				"Content/videos/cover-jardineiro.mp4" = (
+					"video-cover-jardineiro",
+				);
+				"Content/videos/cover-lanterna.mp4" = (
+					"video-cover-lanterna",
+				);
+				"Content/videos/cover-livro.mp4" = (
+					"video-cover-livro",
+				);
+				"Content/videos/cover-loba.mp4" = (
+					"video-cover-loba",
+				);
+				"Content/videos/cover-mare.mp4" = (
+					"video-cover-mare",
+				);
+				"Content/videos/cover-marionete.mp4" = (
+					"video-cover-marionete",
+				);
+				"Content/videos/cover-nomes.mp4" = (
+					"video-cover-nomes",
+				);
+				"Content/videos/cover-orquestra.mp4" = (
+					"video-cover-orquestra",
+				);
+				"Content/videos/cover-ouro.mp4" = (
+					"video-cover-ouro",
+				);
+				"Content/videos/cover-outono.mp4" = (
+					"video-cover-outono",
+				);
+				"Content/videos/cover-pedra.mp4" = (
+					"video-cover-pedra",
+				);
+				"Content/videos/cover-perguntas.mp4" = (
+					"video-cover-perguntas",
+				);
+				"Content/videos/cover-pincel.mp4" = (
+					"video-cover-pincel",
+				);
+				"Content/videos/cover-pintor.mp4" = (
+					"video-cover-pintor",
+				);
+				"Content/videos/cover-ponte.mp4" = (
+					"video-cover-ponte",
+				);
+				"Content/videos/cover-porta.mp4" = (
+					"video-cover-porta",
+				);
+				"Content/videos/cover-reflexo.mp4" = (
+					"video-cover-reflexo",
+				);
+				"Content/videos/cover-relojoeiro.mp4" = (
+					"video-cover-relojoeiro",
+				);
+				"Content/videos/cover-rio.mp4" = (
+					"video-cover-rio",
+				);
+				"Content/videos/cover-segredos.mp4" = (
+					"video-cover-segredos",
+				);
+				"Content/videos/cover-sino.mp4" = (
+					"video-cover-sino",
+				);
+				"Content/videos/cover-sol.mp4" = (
+					"video-cover-sol",
+				);
+				"Content/videos/cover-sombra.mp4" = (
+					"video-cover-sombra",
+				);
+				"Content/videos/cover-tecela.mp4" = (
+					"video-cover-tecela",
+				);
+			};
 			membershipExceptions = (
 				Info.plist,
 			);
@@ -89,6 +691,108 @@
 		831440AF303DDFBA00A4ADD5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					"narration-st-001",
+					"narration-st-002",
+					"narration-st-003",
+					"narration-st-004",
+					"narration-st-005",
+					"narration-st-006",
+					"narration-st-007",
+					"narration-st-008",
+					"narration-st-009",
+					"narration-st-010",
+					"narration-st-011",
+					"narration-st-012",
+					"narration-st-013",
+					"narration-st-014",
+					"narration-st-015",
+					"narration-st-016",
+					"narration-st-017",
+					"narration-st-018",
+					"narration-st-019",
+					"narration-st-020",
+					"narration-st-021",
+					"narration-st-022",
+					"narration-st-023",
+					"narration-st-024",
+					"narration-st-025",
+					"narration-st-026",
+					"narration-st-027",
+					"narration-st-028",
+					"narration-st-029",
+					"narration-st-030",
+					"narration-st-031",
+					"narration-st-032",
+					"narration-st-033",
+					"narration-st-034",
+					"narration-st-035",
+					"narration-st-036",
+					"narration-st-037",
+					"narration-st-038",
+					"narration-st-039",
+					"narration-st-040",
+					"narration-st-041",
+					"narration-st-042",
+					"narration-st-043",
+					"narration-st-044",
+					"narration-st-045",
+					"narration-st-046",
+					"narration-st-047",
+					"narration-st-048",
+					"narration-st-049",
+					"narration-st-050",
+					"video-cover-apicultora",
+					"video-cover-asas",
+					"video-cover-barqueiro",
+					"video-cover-bau",
+					"video-cover-biblioteca",
+					"video-cover-borda",
+					"video-cover-borda-2",
+					"video-cover-cadeira",
+					"video-cover-cartografo",
+					"video-cover-cartomante",
+					"video-cover-casa",
+					"video-cover-cata-vento",
+					"video-cover-comeco",
+					"video-cover-conserto",
+					"video-cover-coracao",
+					"video-cover-corvos",
+					"video-cover-ecos",
+					"video-cover-escuro",
+					"video-cover-espelho",
+					"video-cover-estalagem",
+					"video-cover-estrada",
+					"video-cover-estrela",
+					"video-cover-farol",
+					"video-cover-ferro",
+					"video-cover-guardiao",
+					"video-cover-horas",
+					"video-cover-jardineiro",
+					"video-cover-lanterna",
+					"video-cover-livro",
+					"video-cover-loba",
+					"video-cover-mare",
+					"video-cover-marionete",
+					"video-cover-nomes",
+					"video-cover-orquestra",
+					"video-cover-ouro",
+					"video-cover-outono",
+					"video-cover-pedra",
+					"video-cover-perguntas",
+					"video-cover-pincel",
+					"video-cover-pintor",
+					"video-cover-ponte",
+					"video-cover-porta",
+					"video-cover-reflexo",
+					"video-cover-relojoeiro",
+					"video-cover-rio",
+					"video-cover-segredos",
+					"video-cover-sino",
+					"video-cover-sol",
+					"video-cover-sombra",
+					"video-cover-tecela",
+				);
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2660;
 				LastUpgradeCheck = 2660;

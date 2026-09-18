@@ -104,6 +104,18 @@ Then hit ⌘R to build and run on the simulator of your choice.
 - An iOS 16+ simulator or a physical device
 - An Apple Developer account (only required if you want to test StoreKit purchases on a device)
 
+### On-Demand Resources
+
+Narration (`Content/audio`, ~198 MB) and animated covers (`Content/videos`, ~380 MB) are not part of the App Store download. They are On-Demand Resources, one tag per story (`narration-st-XXX`) and one per cover video (`video-cover-<name>`), fetched the first time a reader plays narration or a focused cover appears. Cover images, story JSON and the index stay in the app bundle.
+
+The tags live in `project.pbxproj` and are generated from the content folders. After adding or renaming audio or video files, close Xcode and run:
+
+```bash
+python3 scripts/tag_ondemand_resources.py
+```
+
+Use `--check` to only verify. An untagged file still works (it just ships inside the app again). Run the app from Xcode to test downloads locally: Xcode hosts the packs during development, and the Debug navigator's Disk gauge shows each tag's state. See `Grimoire/Core/ContentPacks.swift`.
+
 ### Testing purchases
 
 The Grimoire Pro subscription is defined in `Configuration.storekit`. In Xcode, edit the current scheme → **Options** → **StoreKit Configuration** and select that file to test purchases locally without a sandbox account.

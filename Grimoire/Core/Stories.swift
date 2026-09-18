@@ -139,10 +139,11 @@ enum StoryLoader {
             .map { try loadStory(id: $0.id) }
     }
 
-    /// URL do MP3 narrado de um capítulo, se existir no bundle.
-    /// Os arquivos ficam em Content/audio/st-XXX/chY.mp3.
-    /// Retorna nil se o áudio não foi bundleado — o NarrationController
-    /// já lida com isso silenciosamente (o botão só não reage).
+    /// URL do MP3 narrado de um capítulo, se estiver acessível agora.
+    /// Os arquivos ficam em Content/audio/st-XXX-chY.mp3.
+    /// Retorna nil também quando o pacote de narração da história ainda não
+    /// foi baixado (On-Demand Resources) — o NarrationController baixa no
+    /// primeiro play. Ver ContentPacks.swift.
     static func audioURL(storyID: String, chapterIndex: Int) -> URL? {
         NarrationController.audioURL(storyID: storyID, chapterIndex: chapterIndex)
     }

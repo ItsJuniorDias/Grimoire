@@ -312,8 +312,10 @@ struct ReaderView: View {
                 Button {
                     if let chapter {
                         // Só conta como "narração iniciada" se estava parado —
-                        // pausar/retomar não dispara evento.
+                        // pausar/retomar e tocar durante o download não
+                        // disparam evento.
                         let willStart = !narration.isSpeaking && !narration.isPaused
+                            && !narration.isLoading
                         narration.toggle(
                             storyID: story.id,
                             chapterIndex: current,
@@ -328,7 +330,7 @@ struct ReaderView: View {
                         }
                     }
                 } label: {
-                    Image(systemName: narrationIcon)
+                    narrationGlyph
                         .font(.system(size: 22, weight: .bold))
                         .foregroundStyle(DS.Palette.ink900)
                         .frame(width: 60, height: 60)
@@ -336,7 +338,7 @@ struct ReaderView: View {
                         .dsShadow(.lg)
                 }
                 .padding(DS.Space.lg)
-                .accessibilityLabel(narration.isSpeaking && !narration.isPaused ? "Pause narration" : "Play narration")
+                .accessibilityLabel(narrationLabel)
             }
         }
         .onAppear {
@@ -352,10 +354,30 @@ struct ReaderView: View {
         }
     }
 
+    /// Miolo do botão de narração. A narração é On-Demand Resource (ver
+    /// ContentPacks.swift): o primeiro play de uma história baixa o áudio,
+    /// e o botão é o único lugar do leitor que mostra isso.
+    @ViewBuilder
+    private var narrationGlyph: some View {
+        if narration.isLoading {
+            ProgressView()
+                .tint(DS.Palette.ink900)
+        } else {
+            Image(systemName: narrationIcon)
+        }
+    }
+
     /// Ícone do botão de narração conforme o estado.
     private var narrationIcon: String {
+        if narration.loadFailed { return "arrow.clockwise" }
         if narration.isSpeaking && !narration.isPaused { return "pause.fill" }
         return "play.fill"
+    }
+
+    private var narrationLabel: String {
+        if narration.isLoading { return "Downloading narration" }
+        if narration.loadFailed { return "Couldn't download narration. Try again" }
+        return narration.isSpeaking && !narration.isPaused ? "Pause narration" : "Play narration"
     }
 
     private var navFooter: some View {

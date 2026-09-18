@@ -25,6 +25,13 @@
 //    Como a pasta Content/ já é sincronizada, os arquivos são
 //    detectados automaticamente pelo Xcode — nada pra arrastar.
 //
+//  ON-DEMAND RESOURCES:
+//    Os MP3s não vêm no download da App Store (ver ContentPacks.swift).
+//    O primeiro play de uma história baixa os capítulos dela de uma vez
+//    (~4 MB): `isLoading` fica true enquanto baixa e, sem internet,
+//    `loadFailed` vira true e o botão do leitor passa a tentar de novo.
+//    MP3 novo precisa de tag: rode scripts/tag_ondemand_resources.py.
+//
 
 import SwiftUI
 import AVFoundation
@@ -39,6 +46,11 @@ final class NarrationController: NSObject {
     private(set) var spokenParagraph: Int = -1
     private(set) var isSpeaking: Bool = false
     private(set) var isPaused: Bool = false
+    /// Baixando o pacote de narração da história (On-Demand Resources).
+    private(set) var isLoading: Bool = false
+    /// O último download falhou — quase sempre falta de internet. O
+    /// próximo `toggle` tenta de novo.
+    private(set) var loadFailed: Bool = false
 
     /// Velocidade da reprodução. AVAudioPlayer aceita 0.5 (metade) até 2.0
     /// (dobro), com 1.0 = normal. Default calmo pra "história antes de dormir".
@@ -51,6 +63,13 @@ final class NarrationController: NSObject {
     }
 
     private var player: AVAudioPlayer?
+    /// Segura no device o pacote de narração da história. Atravessa as
+    /// trocas de capítulo e é solto junto com o controller, quando o leitor
+    /// fecha.
+    private var narrationAccess: ContentPackAccess?
+    /// Download em andamento. Cancelado pelo `stop()`: trocar de capítulo
+    /// ou fechar o leitor no meio do download não deve tocar nada depois.
+    private var downloadTask: Task<Void, Never>?
     private var paragraphs: [String] = []
     /// Palavras acumuladas por parágrafo (para estimar timing).
     /// Ex: [0, 45, 120, 200] = parágrafo 0 vai do word 0 ao 45, etc.
@@ -76,8 +95,9 @@ final class NarrationController: NSObject {
 
     // MARK: Controle
 
-    /// Começa a narrar um capítulo. Carrega o MP3 correspondente e configura
-    /// o painel da tela de bloqueio.
+    /// Começa a narrar um capítulo. Carrega o MP3 correspondente — baixando
+    /// antes o pacote da história, se ele ainda não estiver no device — e
+    /// configura o painel da tela de bloqueio.
     ///
     /// - Parameters:
     ///   - storyID: id da história (ex. "st-001") — pra achar o MP3 no bundle.
@@ -92,15 +112,50 @@ final class NarrationController: NSObject {
                artwork: String? = nil) {
         stop()
 
-        guard let url = Self.audioURL(storyID: storyID, chapterIndex: chapterIndex) else {
-            // MP3 não encontrado — silencioso pra não crashar; o botão de
-            // play só não vai reagir. Loga pra debug.
-            #if DEBUG
-            print("[Narration] MP3 não encontrado: \(storyID)/ch\(chapterIndex).mp3")
-            #endif
+        // Outra história: devolve o pacote da anterior ao sistema.
+        if narrationAccess?.pack != .narration(storyID: storyID) {
+            narrationAccess = nil
+        }
+
+        if let url = Self.audioURL(storyID: storyID, chapterIndex: chapterIndex) {
+            play(url: url, paragraphs: paragraphs, title: title, subtitle: subtitle, artwork: artwork)
             return
         }
 
+        // Ainda não está no device: baixa o pacote da história e toca
+        // quando chegar.
+        isLoading = true
+        downloadTask = Task {
+            do {
+                let access = try await ContentPackAccess.fetch(.narration(storyID: storyID), urgent: true)
+                guard !Task.isCancelled else { return }
+                narrationAccess = access
+                isLoading = false
+                guard let url = Self.audioURL(storyID: storyID, chapterIndex: chapterIndex) else {
+                    #if DEBUG
+                    print("[Narration] MP3 não encontrado: \(storyID)-ch\(chapterIndex).mp3")
+                    #endif
+                    loadFailed = true
+                    return
+                }
+                play(url: url, paragraphs: paragraphs, title: title, subtitle: subtitle, artwork: artwork)
+            } catch {
+                guard !Task.isCancelled else { return }
+                #if DEBUG
+                print("[Narration] download da narração falhou (\(storyID)):", error)
+                #endif
+                isLoading = false
+                loadFailed = true
+            }
+        }
+    }
+
+    /// Carrega e toca um MP3 já acessível.
+    private func play(url: URL,
+                      paragraphs: [String],
+                      title: String,
+                      subtitle: String,
+                      artwork: String?) {
         self.paragraphs = paragraphs
         computeParagraphOffsets()
         nowPlayingTitle = title
@@ -153,7 +208,9 @@ final class NarrationController: NSObject {
                 title: String = "",
                 subtitle: String = "",
                 artwork: String? = nil) {
-        if isSpeaking && !isPaused {
+        if isLoading {
+            return      // já baixando — o play sai sozinho quando chegar
+        } else if isSpeaking && !isPaused {
             pause()
         } else if isPaused {
             resume()
@@ -168,6 +225,10 @@ final class NarrationController: NSObject {
     }
 
     func stop() {
+        downloadTask?.cancel()
+        downloadTask = nil
+        isLoading = false
+        loadFailed = false
         player?.stop()
         player = nil
         stopTickTimer()
@@ -183,7 +244,9 @@ final class NarrationController: NSObject {
 
     // MARK: - Localização do arquivo
 
-    /// URL do MP3 no bundle pra dado story + chapter.
+    /// URL do MP3 pra dado story + chapter, se estiver acessível agora:
+    /// sem tag no bundle, ou num pacote baixado e seguro por um
+    /// `ContentPackAccess`. nil não quer dizer que a narração não existe.
     /// Os MP3s ficam flat em Content/audio/ com nomes únicos
     /// no formato `st-XXX-chY.mp3` (ex: `st-001-ch2.mp3`).
     /// Formato flat é obrigatório porque com Xcode 16 File System

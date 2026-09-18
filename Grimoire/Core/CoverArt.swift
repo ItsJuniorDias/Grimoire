@@ -15,6 +15,12 @@
 //  — mesma restrição do audio: File System Synchronized Groups fazem
 //  resource copy sem preservar subdiretórios.
 //
+//  Os vídeos são On-Demand Resources (ver ContentPacks.swift): a capa em
+//  foco pede o teaser dela quando aparece, a imagem segura a tela enquanto
+//  ele baixa (~7 MB) e o vídeo entra pelo mesmo crossfade de sempre. Sem
+//  internet, fica só a imagem. Vídeo novo precisa de tag: rode
+//  scripts/tag_ondemand_resources.py.
+//
 
 import SwiftUI
 import UIKit
@@ -29,6 +35,13 @@ struct CoverArt: View {
 
     @State private var videoReady: Bool = false
 
+    /// Teaser já acessível, junto com o nome de quem ele é. O nome impede
+    /// que uma capa reaproveitada pra outra história mostre o vídeo antigo.
+    @State private var loadedVideo: (name: String, url: URL)?
+
+    /// Segura o pacote do teaser no device enquanto esta capa existir.
+    @State private var videoAccess: ContentPackAccess?
+
     private var seed: Int { abs(story.id.hashValue) }
     private var accent: Color { story.cover.accentColor }
 
@@ -37,22 +50,25 @@ struct CoverArt: View {
         UIImage(named: story.cover.asset) != nil
     }
 
-    /// URL do teaser em vídeo, se existir no bundle. Os arquivos ficam
-    /// em Content/videos/ com nomes tipo cover-farol.mp4. O nome é
-    /// derivado do asset: CoverFarol → cover-farol (kebab-case).
-    private var videoURL: URL? {
-        Self.videoURL(forAsset: story.cover.asset)
+    private var videoName: String {
+        Self.videoName(forAsset: story.cover.asset)
     }
 
-    static func videoURL(forAsset asset: String) -> URL? {
-        // "CoverFarol" -> "cover-farol"
+    /// Nome do teaser derivado do asset, sem extensão. É também o nome da
+    /// tag de On-Demand Resources, então arquivo e tag nunca divergem.
+    ///
+    ///     CoverFarol  → cover-farol
+    ///     CoverBorda2 → cover-borda-2
+    static func videoName(forAsset asset: String) -> String {
         //   1. remove prefixo "Cover"
-        //   2. CamelCase → kebab-case
+        //   2. CamelCase → kebab-case; número começa palavra nova
         let bare = asset.hasPrefix("Cover") ? String(asset.dropFirst("Cover".count)) : asset
         var parts: [String] = []
         var current = ""
         for ch in bare {
-            if ch.isUppercase && !current.isEmpty {
+            let startsWord = ch.isUppercase
+                || (ch.isNumber && !(current.last?.isNumber ?? false))
+            if startsWord && !current.isEmpty {
                 parts.append(current)
                 current = String(ch)
             } else {
@@ -60,10 +76,15 @@ struct CoverArt: View {
             }
         }
         if !current.isEmpty { parts.append(current) }
-        let kebab = "cover-" + parts.map { $0.lowercased() }.joined(separator: "-")
-        return Bundle.main.url(forResource: kebab, withExtension: "mp4",
-                               subdirectory: "Content/videos")
-            ?? Bundle.main.url(forResource: kebab, withExtension: "mp4")
+        return "cover-" + parts.map { $0.lowercased() }.joined(separator: "-")
+    }
+
+    /// URL do teaser, se estiver acessível agora: sem tag no bundle, ou num
+    /// pacote baixado e seguro por um `ContentPackAccess`.
+    static func videoURL(named name: String) -> URL? {
+        Bundle.main.url(forResource: name, withExtension: "mp4",
+                        subdirectory: "Content/videos")
+            ?? Bundle.main.url(forResource: name, withExtension: "mp4")
     }
 
     var body: some View {
@@ -81,10 +102,10 @@ struct CoverArt: View {
             }
 
             // Camada de cima: vídeo em loop, só se estamos "focused" e
-            // temos o arquivo no bundle. Aparece com fade quando o 1º
+            // o teaser já chegou. Aparece com fade quando o 1º
             // frame carrega — evita jump feio de imagem pra vídeo.
-            if isFocused, let url = videoURL {
-                LoopingVideoView(url: url, onReady: {
+            if isFocused, let loadedVideo, loadedVideo.name == videoName {
+                LoopingVideoView(url: loadedVideo.url, onReady: {
                     withAnimation(.easeInOut(duration: 0.35)) {
                         videoReady = true
                     }
@@ -96,6 +117,21 @@ struct CoverArt: View {
         }
         .frame(height: height)
         .clipped()
+        // Só capa em foco baixa teaser. Sair da tela no meio do download
+        // cancela o download — quem passou rápido não precisa do vídeo.
+        .task(id: isFocused ? videoName : nil) {
+            guard isFocused, loadedVideo?.name != videoName else { return }
+            await loadVideo(named: videoName)
+        }
+    }
+
+    private func loadVideo(named name: String) async {
+        // Falha (sem internet, sem espaço, vídeo sem tag) é silenciosa: se o
+        // arquivo não aparecer, fica só a imagem — como antes, quando a
+        // história não tinha vídeo.
+        videoAccess = try? await ContentPackAccess.fetch(.coverVideo(name: name))
+        guard !Task.isCancelled, let url = Self.videoURL(named: name) else { return }
+        loadedVideo = (name, url)
     }
 
     // MARK: - Capa procedural (fallback pra histórias sem arte final)
