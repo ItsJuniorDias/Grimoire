@@ -35,11 +35,11 @@ enum ReaderRank: Int, CaseIterable, Comparable {
 
     var title: String {
         switch self {
-        case .apprentice:  return "Apprentice"
-        case .initiate:    return "Initiate"
-        case .conjurer:    return "Conjurer"
-        case .archmage:    return "Archmage"
-        case .grandmaster: return "Grandmaster"
+        case .apprentice:  return String(localized: "Apprentice")
+        case .initiate:    return String(localized: "Initiate")
+        case .conjurer:    return String(localized: "Conjurer")
+        case .archmage:    return String(localized: "Archmage")
+        case .grandmaster: return String(localized: "Grandmaster")
         }
     }
 
@@ -56,11 +56,11 @@ enum ReaderRank: Int, CaseIterable, Comparable {
     /// Frase curta que descreve o posto.
     var blurb: String {
         switch self {
-        case .apprentice:  return "Your journey begins."
-        case .initiate:    return "The dark starts to open."
-        case .conjurer:    return "You walk deeper now."
-        case .archmage:    return "Few reach this far."
-        case .grandmaster: return "The whole grimoire, read."
+        case .apprentice:  return String(localized: "Your journey begins.")
+        case .initiate:    return String(localized: "The dark starts to open.")
+        case .conjurer:    return String(localized: "You walk deeper now.")
+        case .archmage:    return String(localized: "Few reach this far.")
+        case .grandmaster: return String(localized: "The whole grimoire, read.")
         }
     }
 
@@ -82,8 +82,8 @@ enum ReaderRank: Int, CaseIterable, Comparable {
 /// lugar só, e o AppState só fornece os números.
 struct Achievement: Identifiable {
     let id: String
-    let title: String
-    let detail: String
+    let title: LocalizedStringKey
+    let detail: LocalizedStringKey
     let symbol: String
     /// Meta para 100% (usado na barra de progresso). 1 = booleana.
     let goal: Int

@@ -166,7 +166,7 @@ struct HomeView: View {
                         .frame(width: 66)
                         .clipShape(RoundedRectangle(cornerRadius: DS.Radius.md))
                     VStack(alignment: .leading, spacing: DS.Space.xs) {
-                        Text(s.title).font(DS.Typography.subtitle)
+                        Text(s.localizedTitle).font(DS.Typography.subtitle)
                             .foregroundStyle(DS.Colors.textPrimary)
                             .lineLimit(1)
                         Text("Chapter \(app.lastChapter(of: s.id) + 1) of 3")
@@ -225,9 +225,9 @@ struct HomeView: View {
                                 VStack(alignment: .leading, spacing: DS.Space.xxs) {
                                     HStack(spacing: DS.Space.xs) {
                                         GTag(text: s.level.label, icon: s.level.symbol, tint: s.level.color)
-                                        GTag(text: "\(s.readingMinutes) min", icon: "clock")
+                                        GTag(text: String(localized: "\(s.readingMinutes) min"), icon: "clock")
                                     }
-                                    Text(s.title)
+                                    Text(s.localizedTitle)
                                         .font(DS.Typography.display(20, .bold))
                                         .foregroundStyle(DS.Palette.paper)
                                         .lineLimit(2)
@@ -273,13 +273,13 @@ struct HomeView: View {
                     VStack(alignment: .leading, spacing: DS.Space.xs) {
                         HStack(spacing: DS.Space.xs) {
                             GTag(text: s.level.label, icon: s.level.symbol, tint: s.level.color)
-                            if let t = s.tags.first { GTag(text: t) }
+                            if let t = s.tags.first { GTag(text: t.localizedContent) }
                         }
-                        Text(s.title)
+                        Text(s.localizedTitle)
                             .font(DS.Typography.display(26, .bold))
                             .foregroundStyle(DS.Palette.paper)
                             .lineLimit(2)
-                        Text(s.summary)
+                        Text(s.localizedSummary)
                             .font(DS.Typography.bodySm)
                             .foregroundStyle(DS.Palette.paper.opacity(0.85))
                             .lineLimit(2)
@@ -362,7 +362,7 @@ struct StoryTile: View {
                 }
                 .frame(width: 150)
 
-                Text(summary.title)
+                Text(summary.localizedTitle)
                     .font(DS.Typography.bodyMd.bold())
                     .foregroundStyle(DS.Colors.textPrimary)
                     .lineLimit(2)

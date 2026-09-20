@@ -300,8 +300,11 @@ final class NarrationController: NSObject {
         // Timer a cada 0.4s atualiza o parágrafo atual e o Now Playing.
         // Grosso o suficiente pra não pesar, fino o suficiente pro highlight
         // não parecer que tá atrasado.
+        // O `[weak self]` de fora vira uma var capturada; recapturar fraco
+        // dentro da Task evita atravessar o limite de concorrência com ela
+        // (erro no modo Swift 6).
         let timer = Timer(timeInterval: 0.4, repeats: true) { [weak self] _ in
-            Task { @MainActor in self?.tick() }
+            Task { @MainActor [weak self] in self?.tick() }
         }
         RunLoop.main.add(timer, forMode: .common)
         tickTimer = timer

@@ -18,26 +18,28 @@ struct OnboardingView: View {
 
     private struct Page {
         let image: String     // asset de fundo
-        let kicker: String
-        let title: String
-        let body: String
+        /// Chaves do String Catalog. O kicker é desenhado em caixa-alta
+        /// por `.textCase`, não por chave — ver build_strings_catalog.py.
+        let kicker: LocalizedStringKey
+        let title: LocalizedStringKey
+        let body: LocalizedStringKey
         /// true quando a imagem tem topo CLARO (texto do topo precisa de proteção extra)
         let lightTop: Bool
     }
 
     private let pages: [Page] = [
         .init(image: "OnbWelcome",
-              kicker: "WELCOME",
+              kicker: "Welcome",
               title: "Stories that\naren't afraid of the dark",
               body: "Rich, shadowy tales for anyone tired of silly stories. Courage, mystery, and worlds with rules of their own.",
               lightTop: false),
         .init(image: "OnbHow",
-              kicker: "HOW IT WORKS",
+              kicker: "How it works",
               title: "Every story,\nthree chapters",
               body: "You step in, learn how the world works, and discover how courage beats what force cannot. A ten-minute read that stays with you.",
               lightTop: false),
         .init(image: "OnbPath",
-              kicker: "YOUR PATH",
+              kicker: "Your Path",
               title: "From Apprentice\nto Archmage",
               body: "Every story you read moves your journey forward. Save your favorites, pick up where you left off, and unlock the whole grimoire.",
               lightTop: true)
@@ -110,8 +112,10 @@ struct OnboardingView: View {
                 .resizable()
                 .scaledToFill()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .scaleEffect(active ? 1.0 : 1.06)
-                .animation(.easeOut(duration: 0.6), value: active)
+                // Reduce Motion desliga o leve zoom de entrada — é o único
+                // movimento involuntário desta tela, e o header já prometia.
+                .scaleEffect(reduceMotion ? 1.0 : (active ? 1.0 : 1.06))
+                .animation(reduceMotion ? nil : .easeOut(duration: 0.6), value: active)
                 .clipped()
                 .ignoresSafeArea()
 
@@ -149,6 +153,7 @@ struct OnboardingView: View {
         VStack(spacing: DS.Space.sm) {
             Text(p.kicker)
                 .font(DS.Typography.caption)
+                .textCase(.uppercase)
                 .tracking(4)
                 .foregroundStyle(DS.Colors.accent)
 

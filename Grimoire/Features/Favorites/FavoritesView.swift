@@ -111,7 +111,7 @@ struct FavoriteCard: View {
                     }
                     .padding(DS.Space.xs)
                 }
-                Text(summary.title)
+                Text(summary.localizedTitle)
                     .font(DS.Typography.bodyMd.bold())
                     .foregroundStyle(DS.Colors.textPrimary)
                     .lineLimit(2)

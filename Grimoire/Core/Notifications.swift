@@ -109,8 +109,8 @@ final class NotificationsManager {
     /// "chamada a um ritual", não anúncio publicitário.
     private func scheduleDaily(hour: Int) {
         let content = UNMutableNotificationContent()
-        content.title = "A story before sleep?"
-        content.body  = "Five quiet minutes with the grimoire."
+        content.title = String(localized: "A story before sleep?")
+        content.body  = String(localized: "Five quiet minutes with the grimoire.")
         content.sound = .default
 
         var comps = DateComponents()
@@ -126,8 +126,8 @@ final class NotificationsManager {
     /// livres da semana. O texto não diz quais — é pretexto pra abrir o app.
     private func scheduleWeekly() {
         let content = UNMutableNotificationContent()
-        content.title = "Three new stories are free"
-        content.body  = "This week's selection has changed."
+        content.title = String(localized: "Three new stories are free")
+        content.body  = String(localized: "This week's selection has changed.")
         content.sound = .default
 
         var comps = DateComponents()
@@ -156,8 +156,8 @@ final class NotificationsManager {
         guard let fireDate = cal.date(from: comps), fireDate > Date() else { return }
 
         let content = UNMutableNotificationContent()
-        content.title = "Your streak is at risk"
-        content.body  = "You're on a \(streakCount)-day streak. A chapter keeps it alive."
+        content.title = String(localized: "Your streak is at risk")
+        content.body  = String(localized: "You're on a \(streakCount)-day streak. A chapter keeps it alive.")
         content.sound = .default
 
         let trigger = UNCalendarNotificationTrigger(

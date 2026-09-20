@@ -63,6 +63,8 @@ final class AppState {
         static let notifsHour      = "grimoire.notif.dailyHour"
         static let notifsWeekly    = "grimoire.notif.weekly"
         static let notifsStreak    = "grimoire.notif.streak"
+        // Idioma escolhido no app (BCP-47), ou ausente pra seguir o sistema.
+        static let language        = "grimoire.language"
     }
 
     // MARK: Streak de leitura (persistido)
@@ -89,6 +91,46 @@ final class AppState {
         didSet { defaults.set(streakRiskEnabled, forKey: Keys.notifsStreak) }
     }
 
+    // MARK: Idioma
+    //
+    // A escolha é aplicada via `AppleLanguages` no UserDefaults — a mesma
+    // chave que o sistema usa. Isso faz o String Catalog inteiro (interface
+    // E conteúdo) resolver no idioma escolhido, sem nenhum `if` espalhado
+    // pelas views. O preço é que a troca só vale no PRÓXIMO lançamento do
+    // app, porque o bundle resolve a localização uma vez, no launch. O
+    // picker em Profile diz isso à pessoa em vez de fingir que mudou.
+
+    /// Código BCP-47 do idioma escolhido, ou nil pra seguir o sistema.
+    var preferredLanguage: String? {
+        didSet {
+            if let code = preferredLanguage {
+                defaults.set(code, forKey: Keys.language)
+                defaults.set([code], forKey: "AppleLanguages")
+            } else {
+                defaults.removeObject(forKey: Keys.language)
+                defaults.removeObject(forKey: "AppleLanguages")
+            }
+        }
+    }
+
+    /// Idiomas oferecidos, na ordem em que aparecem no picker. Cada um se
+    /// apresenta no próprio idioma — quem não lê a língua do app ainda
+    /// reconhece a sua. Precisa bater com `ContentLanguage.supported` e com
+    /// `knownRegions` no project.pbxproj.
+    static let availableLanguages: [(code: String, label: String)] = [
+        ("en",    "English"),
+        ("pt-BR", "Português (Brasil)"),
+        ("es",    "Español"),
+        ("fr",    "Français"),
+        ("de",    "Deutsch"),
+        ("it",    "Italiano"),
+        ("ar",    "العربية"),
+    ]
+
+    /// O idioma que o app está realmente usando agora — o escolhido, ou o
+    /// que o sistema resolveu. Usado pra marcar a linha certa no picker.
+    var effectiveLanguage: String { preferredLanguage ?? ContentLanguage.current }
+
     /// True se o usuário já leu algo hoje (calendário local). Usado pra decidir
     /// se agenda o alerta de "streak em risco" das 21h.
     var hasReadToday: Bool {
@@ -111,6 +153,7 @@ final class AppState {
         bestStreak = defaults.integer(forKey: Keys.streakBest)
         lastReadDay = defaults.object(forKey: Keys.streakLast) as? Date
         readAfterMidnight = defaults.bool(forKey: Keys.readAfterMidnight)
+        preferredLanguage = defaults.string(forKey: Keys.language)
 
         // Preferências de notificação. Defaults: mestre off (nunca liga sozinho —
         // permissão só é pedida quando o usuário liga em Profile); sub-toggles on

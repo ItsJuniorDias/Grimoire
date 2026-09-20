@@ -25,6 +25,7 @@ struct ProfileView: View {
                     rankCard
                     streakRow
                     remindersSection
+                    languageSection
                     achievementsSection
                     Color.clear.frame(height: DS.Space.xl)
                 }
@@ -128,7 +129,7 @@ struct ProfileView: View {
         }
     }
 
-    private func statTile(icon: String, value: String, label: String, tint: Color) -> some View {
+    private func statTile(icon: String, value: String, label: LocalizedStringKey, tint: Color) -> some View {
         VStack(spacing: DS.Space.xxs) {
             Image(systemName: icon).font(.system(size: 18)).foregroundStyle(tint)
             Text(value).font(DS.Typography.subtitle.bold())
@@ -276,15 +277,73 @@ struct ProfileView: View {
         }
     }
 
+    // MARK: - Idioma
+    //
+    // A troca é aplicada em `AppleLanguages` e o bundle só relê isso no
+    // launch. Em vez de fingir que a tela mudou, o card diz que precisa
+    // reabrir — e explica de onde vem a tradução das histórias, porque
+    // "traduzido automaticamente" no leitor sem aviso prévio surpreende.
+
+    private var languageSection: some View {
+        VStack(alignment: .leading, spacing: DS.Space.md) {
+            Text("LANGUAGE").font(DS.Typography.caption).tracking(3)
+                .foregroundStyle(DS.Colors.textMuted)
+
+            VStack(spacing: DS.Space.md) {
+                HStack {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("App language")
+                            .font(DS.Typography.bodyMd)
+                            .foregroundStyle(DS.Colors.textPrimary)
+                        Text("Reopen Grimoire to finish switching.")
+                            .font(DS.Typography.caption)
+                            .foregroundStyle(DS.Colors.textMuted)
+                    }
+                    Spacer()
+                    Picker("", selection: languageBinding(app: app)) {
+                        Text("Follow system").tag(String?.none)
+                        ForEach(AppState.availableLanguages, id: \.code) { lang in
+                            // Cada idioma se apresenta no próprio idioma:
+                            // quem não lê a língua atual do app ainda
+                            // reconhece a sua na lista.
+                            Text(lang.label).tag(String?.some(lang.code))
+                        }
+                    }
+                    .pickerStyle(.menu)
+                    .tint(DS.Colors.brass)
+                }
+
+                Divider().overlay(DS.Colors.border)
+
+                Text("Stories are translated on your device the first time you open a chapter.")
+                    .font(DS.Typography.caption)
+                    .foregroundStyle(DS.Colors.textMuted)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+            .padding(DS.Space.md)
+            .background(DS.Colors.surface.opacity(0.5), in: .rect(cornerRadius: DS.Radius.md))
+            .overlay(RoundedRectangle(cornerRadius: DS.Radius.md)
+                .stroke(DS.Colors.border.opacity(0.6), lineWidth: 1))
+        }
+    }
+
+    private func languageBinding(app: AppState) -> Binding<String?> {
+        Binding(
+            get: { app.preferredLanguage },
+            set: { app.preferredLanguage = $0 }
+        )
+    }
+
     // Subtítulo dinâmico do toggle mestre, dependendo do estado do sistema.
     private var masterSubtitle: String {
         switch notifs.authorizationStatus {
-        case .denied:       return "Blocked by system. Tap below to enable."
-        case .notDetermined: return "Choose when to be reminded."
+        case .denied:       return String(localized: "Blocked by system. Tap below to enable.")
+        case .notDetermined: return String(localized: "Choose when to be reminded.")
         default:
             return app.notificationsEnabled
-                ? "You'll be nudged to keep the ritual."
-                : "Off — no reminders will be sent."
+                ? String(localized: "You'll be nudged to keep the ritual.")
+                : String(localized: "Off — no reminders will be sent.")
         }
     }
 
@@ -295,9 +354,7 @@ struct ProfileView: View {
     private func hourLabel(_ h: Int) -> String {
         var comps = DateComponents(); comps.hour = h; comps.minute = 0
         let date = Calendar.current.date(from: comps) ?? Date()
-        let fmt = DateFormatter()
-        fmt.timeStyle = .short
-        return fmt.string(from: date)
+        return date.formatted(date: .omitted, time: .shortened)
     }
 
     // MARK: Bindings do toggle mestre (com side-effects)

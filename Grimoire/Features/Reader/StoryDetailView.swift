@@ -10,6 +10,8 @@
 //
 
 import SwiftUI
+// Pelo `.translationTask`, que e extensao de View vinda daqui.
+import Translation
 
 struct StoryDetailView: View {
     let summary: StorySummary
@@ -37,9 +39,9 @@ struct StoryDetailView: View {
                     VStack(alignment: .leading, spacing: DS.Space.xs) {
                         HStack(spacing: DS.Space.xs) {
                             GTag(text: summary.level.label, icon: summary.level.symbol, tint: summary.level.color)
-                            GTag(text: "\(summary.readingMinutes) min", icon: "clock")
+                            GTag(text: String(localized: "\(summary.readingMinutes) min"), icon: "clock")
                         }
-                        Text(summary.title)
+                        Text(summary.localizedTitle)
                             .font(DS.Typography.display(30, .bold))
                             .foregroundStyle(DS.Palette.paper)
                     }
@@ -47,13 +49,13 @@ struct StoryDetailView: View {
                 }
 
                 VStack(alignment: .leading, spacing: DS.Space.md) {
-                    Text(summary.summary)
+                    Text(summary.localizedSummary)
                         .font(DS.Typography.bodyLg)
                         .foregroundStyle(DS.Colors.textSecondary)
                         .lineSpacing(4)
 
                     HStack(spacing: DS.Space.xs) {
-                        ForEach(summary.tags, id: \.self) { GTag(text: $0) }
+                        ForEach(summary.tags, id: \.self) { GTag(text: $0.localizedContent) }
                     }
 
                     Divider().overlay(DS.Colors.border)
@@ -61,6 +63,19 @@ struct StoryDetailView: View {
                     // Capítulos
                     Text("CHAPTERS").font(DS.Typography.caption).tracking(3)
                         .foregroundStyle(DS.Colors.textMuted)
+
+                    // Fora do inglês o leitor não mostra o botão de narração.
+                    // Dizer por quê aqui, antes de a pessoa abrir o capítulo e
+                    // procurar o botão que sumiu.
+                    if !ContentLanguage.hasNarration {
+                        HStack(spacing: DS.Space.xs) {
+                            Image(systemName: "speaker.slash")
+                                .font(.system(size: 11))
+                            Text("Narration is only available in English")
+                                .font(DS.Typography.caption)
+                        }
+                        .foregroundStyle(DS.Colors.textMuted)
+                    }
 
                     if let story {
                         ForEach(story.chapters) { ch in
@@ -155,7 +170,7 @@ struct StoryDetailView: View {
                     }
                 }
                 VStack(alignment: .leading, spacing: 1) {
-                    Text(ch.title).font(DS.Typography.bodyMd)
+                    Text(ch.localizedTitle).font(DS.Typography.bodyMd)
                         .foregroundStyle(DS.Colors.textPrimary)
                     Text("\(ch.wordCount ?? 0) words")
                         .font(DS.Typography.caption).foregroundStyle(DS.Colors.textMuted)
@@ -181,7 +196,9 @@ struct StoryDetailView: View {
                 }
                 .padding(DS.Space.lg)
             } else {
-                GButton(title: started ? "Continue · Chapter \(next)" : "Start reading",
+                GButton(title: started
+                            ? "Continue · Chapter \(next)"
+                            : "Start reading",
                         variant: .primary, icon: "book.fill") {
                     reading = next
                 }
@@ -214,6 +231,9 @@ struct ReaderView: View {
     @Environment(Analytics.self) private var analytics
     @State private var current: Int = 1
     @State private var narration = NarrationController()
+    /// Traducao automatica no aparelho, pros capitulos sem traducao humana
+    /// no catalogo. Ver Core/ChapterTranslation.swift.
+    @State private var translation = ChapterTranslation()
 
     private var chapter: Chapter? { story.chapters.first { $0.index == current } }
 
@@ -230,15 +250,26 @@ struct ReaderView: View {
                         VStack(alignment: .leading, spacing: DS.Space.xs) {
                             Text("CHAPTER \(current)").font(DS.Typography.caption).tracking(4)
                                 .foregroundStyle(DS.Colors.accent)
-                            Text(chapter?.title ?? "")
+                            Text(chapter?.localizedTitle ?? "")
                                 .font(DS.Typography.display(28, .bold))
                                 .foregroundStyle(DS.Colors.textPrimary)
                         }
                         .padding(.top, DS.Space.xxl)
                         .id("readerTop")   // âncora pro topo da leitura
 
-                        if let chapter {
-                            ForEach(Array(chapter.paragraphs.enumerated()), id: \.offset) { idx, para in
+                        // Diz de onde veio a prosa. Sem esta linha a pessoa
+                        // julga a escrita do app pela traducao da Apple, e o
+                        // texto de origem nao tem como se defender.
+                        if translation.isMachineTranslated {
+                            Text("Translated automatically")
+                                .font(DS.Typography.caption)
+                                .foregroundStyle(DS.Colors.textMuted)
+                        }
+
+                        if translation.state == .working {
+                            translatingNotice
+                        } else if let chapter {
+                            ForEach(Array(translation.paragraphs(for: chapter).enumerated()), id: \.offset) { idx, para in
                                 Text(para)
                                     .font(DS.Typography.bodyLg)
                                     .foregroundStyle(
@@ -309,6 +340,10 @@ struct ReaderView: View {
             }
             // Botão de narração flutuante — apagar a luz e ouvir.
             .overlay(alignment: .bottomTrailing) {
+                // Narracao so existe em ingles (ver ContentLanguage). Tocar a
+                // faixa inglesa pra quem pos o app em portugues entrega uma voz
+                // que a pessoa nao pediu — pior que nao ter audio.
+                if ContentLanguage.hasNarration {
                 Button {
                     if let chapter {
                         // Só conta como "narração iniciada" se estava parado —
@@ -321,7 +356,7 @@ struct ReaderView: View {
                             chapterIndex: current,
                             paragraphs: chapter.paragraphs,
                             title: story.title,
-                            subtitle: "Chapter \(current) · \(chapter.title)",
+                            subtitle: String(localized: "Chapter \(current) · \(chapter.localizedTitle)"),
                             artwork: story.cover.asset
                         )
                         if willStart {
@@ -339,19 +374,44 @@ struct ReaderView: View {
                 }
                 .padding(DS.Space.lg)
                 .accessibilityLabel(narrationLabel)
+                }
             }
+        }
+        // `configuration` e nil na maioria das aberturas — ingles, traducao
+        // humana, ou cache — e entao isto nao faz nada.
+        .translationTask(translation.configuration) { session in
+            await translation.run(session: session)
         }
         .onAppear {
             // Blindagem: se abrirem já num capítulo inacessível, cai no 1.
             current = isAccessible(startAt) ? startAt : 1
             onRead(current)
+            if let chapter { translation.prepare(chapter: chapter, storyID: story.id) }
         }
         .onChange(of: current) { _, _ in
             narration.stop()   // troca de capítulo interrompe a narração anterior
+            if let chapter { translation.prepare(chapter: chapter, storyID: story.id) }
         }
         .onDisappear {
             narration.stop()   // fecha o leitor -> para o áudio e libera a sessão
+            translation.teardown()
         }
+    }
+
+    /// Primeira abertura de um capítulo fora do inglês: a máquina está
+    /// trabalhando. Acontece uma vez por capítulo — depois vem do cache.
+    private var translatingNotice: some View {
+        VStack(spacing: DS.Space.sm) {
+            ProgressView().tint(DS.Colors.accent)
+            Text("Translating this chapter…")
+                .font(DS.Typography.bodyMd)
+                .foregroundStyle(DS.Colors.textSecondary)
+            Text("First time only — it's saved for next time.")
+                .font(DS.Typography.caption)
+                .foregroundStyle(DS.Colors.textMuted)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, DS.Space.xxl)
     }
 
     /// Miolo do botão de narração. A narração é On-Demand Resource (ver
@@ -375,9 +435,11 @@ struct ReaderView: View {
     }
 
     private var narrationLabel: String {
-        if narration.isLoading { return "Downloading narration" }
-        if narration.loadFailed { return "Couldn't download narration. Try again" }
-        return narration.isSpeaking && !narration.isPaused ? "Pause narration" : "Play narration"
+        if narration.isLoading { return String(localized: "Downloading narration") }
+        if narration.loadFailed { return String(localized: "Couldn't download narration. Try again") }
+        return narration.isSpeaking && !narration.isPaused
+            ? String(localized: "Pause narration")
+            : String(localized: "Play narration")
     }
 
     private var navFooter: some View {

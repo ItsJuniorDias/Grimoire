@@ -62,7 +62,7 @@ final class SubscriptionStore {
                 .sorted { ($0.price) < ($1.price) }
             await refresh()
         } catch {
-            purchaseError = "Couldn't load the plans. Try again."
+            purchaseError = String(localized: "Couldn't load the plans. Try again.")
         }
     }
 
@@ -96,7 +96,7 @@ final class SubscriptionStore {
                 return false
             }
         } catch {
-            purchaseError = "The purchase didn't go through."
+            purchaseError = String(localized: "The purchase didn't go through.")
             return false
         }
     }
@@ -106,7 +106,7 @@ final class SubscriptionStore {
             try await AppStore.sync()
             await refresh()
         } catch {
-            purchaseError = "Couldn't restore. Try again."
+            purchaseError = String(localized: "Couldn't restore. Try again.")
         }
     }
 

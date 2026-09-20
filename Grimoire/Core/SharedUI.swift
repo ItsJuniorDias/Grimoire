@@ -67,6 +67,9 @@ struct WaxSeal: View {
 // ============================================================
 
 struct GTag: View {
+    /// Ja traduzido pelo call site: aqui chegam coisas de origens
+    /// diferentes (rotulo de nivel, tag vinda do JSON, interpolacao),
+    /// entao quem chama resolve e o chip so desenha.
     let text: String
     var icon: String? = nil
     var tint: Color = DS.Colors.textSecondary
@@ -158,9 +161,9 @@ struct PremiumLock: View {
 
 struct StatusView: View {
     let icon: String
-    let title: String
-    let message: String
-    var actionTitle: String? = nil
+    let title: LocalizedStringKey
+    let message: LocalizedStringKey
+    var actionTitle: LocalizedStringKey? = nil
     var actionIcon: String? = nil
     var action: (() -> Void)? = nil
 
@@ -203,12 +206,14 @@ struct StatusView: View {
 // ============================================================
 
 extension StoryLevel {
+    /// Rotulo traduzido. String e nao LocalizedStringKey porque o valor
+    /// tambem entra em interpolacao ("%lld more to become %@").
     var label: String {
         switch self {
-        case .apprentice: "Apprentice"
-        case .initiate:   "Initiate"
-        case .conjurer:   "Conjurer"
-        case .archmage:   "Archmage"
+        case .apprentice: String(localized: "Apprentice")
+        case .initiate:   String(localized: "Initiate")
+        case .conjurer:   String(localized: "Conjurer")
+        case .archmage:   String(localized: "Archmage")
         }
     }
     var symbol: String {

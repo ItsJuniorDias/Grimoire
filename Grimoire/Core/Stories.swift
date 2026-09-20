@@ -21,6 +21,74 @@
 import Foundation
 
 // ============================================================
+// Conteúdo localizado
+// ============================================================
+
+extension String {
+
+    /// Resolve esta string como CONTEÚDO traduzido.
+    ///
+    /// A ideia: título, sinopse, título de capítulo e corpo do capítulo
+    /// existem em inglês no JSON do bundle, e a tradução vive no
+    /// `Localizable.xcstrings` com a própria string-fonte como chave. Pedir
+    /// `.localizedContent` devolve a versão no idioma corrente ou, se ela
+    /// não existir, a string em inglês de volta — o fallback nativo do
+    /// String Catalog, sem `if` nenhum do nosso lado.
+    ///
+    /// Nome diferente de `.localized` de propósito: este é o caminho do
+    /// CONTEÚDO. Rótulo de interface passa pelo `LocalizedStringKey` de
+    /// sempre, que o SwiftUI resolve sozinho.
+    ///
+    /// COMO ADICIONAR TRADUÇÃO HUMANA DE CONTEÚDO:
+    ///   1. Abra `Grimoire/Localizable.xcstrings` no Xcode.
+    ///   2. Chave nova = o texto em inglês inteiro, do primeiro ao último
+    ///      caractere, exatamente como está no JSON.
+    ///   3. Preencha os 6 idiomas. Parcial funciona — o que faltar cai no
+    ///      inglês, e o `ChapterTranslation` nem entra em ação onde há
+    ///      tradução humana.
+    var localizedContent: String {
+        String(localized: LocalizedStringResource(stringLiteral: self))
+    }
+}
+
+/// O idioma em que o CONTEÚDO existe, que não é o mesmo em que a
+/// interface existe.
+///
+/// A interface fala sete línguas. As histórias foram escritas uma vez, em
+/// inglês, e a narração foi gravada uma vez, em inglês. Gravar de novo em
+/// seis línguas é produção de áudio, não código — então fora do inglês o
+/// leitor desliga o transporte e diz por quê. Tocar a faixa inglesa pra
+/// quem pôs o app em português entrega uma voz que a pessoa não pediu.
+///
+/// Quando houver narração em outra língua, `narrated` vira uma consulta ao
+/// que existe por idioma e o resto do código não muda.
+enum ContentLanguage {
+
+    /// A língua em que o conteúdo foi escrito e gravado.
+    static let source = "en"
+
+    /// Línguas em que há narração gravada.
+    static let narrated: Set<String> = [source]
+
+    /// Línguas que a interface fala. Precisa bater com `knownRegions` no
+    /// project.pbxproj e com `AppState.availableLanguages`.
+    static let supported: [String] = [source, "pt-BR", "es", "fr", "de", "it", "ar"]
+
+    /// A língua que o bundle realmente resolveu — respeita tanto o idioma
+    /// do sistema quanto o override de `AppState.preferredLanguage`,
+    /// porque os dois passam por `AppleLanguages`.
+    static var current: String {
+        Bundle.main.preferredLocalizations.first ?? source
+    }
+
+    /// Estamos fora do inglês, então faz sentido pedir tradução à máquina.
+    static var canMachineTranslate: Bool { current != source }
+
+    /// Há narração na língua corrente.
+    static var hasNarration: Bool { narrated.contains(current) }
+}
+
+// ============================================================
 // Modelos — espelham schema.json 1:1
 // ============================================================
 
@@ -41,9 +109,37 @@ struct Chapter: Codable, Hashable, Identifiable {
 
     var id: Int { index }
 
-    /// Parágrafos já separados, prontos pra renderizar.
+    /// Parágrafos da string-fonte em inglês. Use `localizedParagraphs` na
+    /// UI — este fica pro que precisa do original (narração, busca).
     var paragraphs: [String] {
-        body.components(separatedBy: "\n\n").filter { !$0.isEmpty }
+        Chapter.paragraphs(in: body)
+    }
+
+    // MARK: Conteúdo localizado
+    //
+    // Os `let` originais continuam sendo a fonte em inglês (que é a chave
+    // de tradução) e seguem disponíveis. As views usam estes acessores.
+
+    var localizedTitle: String { title.localizedContent }
+    var localizedBody: String { body.localizedContent }
+
+    /// Parágrafos do texto que vai pra tela. Quando há tradução humana no
+    /// catálogo, a quebra acontece nos parágrafos daquele idioma.
+    var localizedParagraphs: [String] {
+        Chapter.paragraphs(in: localizedBody)
+    }
+
+    /// Existe tradução humana desta capítulo no catálogo.
+    /// Falso quando o catálogo devolveu a própria string-fonte de volta —
+    /// é o sinal de que o `ChapterTranslation` deve tentar a máquina.
+    var hasHumanTranslation: Bool { body != localizedBody }
+
+    /// Quebra qualquer texto em parágrafos. Estático porque o texto vindo
+    /// da tradução automática não pertence a nenhum `Chapter`.
+    static func paragraphs(in text: String) -> [String] {
+        text.components(separatedBy: "\n\n")
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
     }
 }
 
@@ -61,6 +157,10 @@ struct StorySummary: Codable, Hashable, Identifiable {
     let tags: [String]
     let language: String
     let file: String
+
+    // MARK: Conteúdo localizado
+    var localizedTitle: String { title.localizedContent }
+    var localizedSummary: String { summary.localizedContent }
 }
 
 /// História completa (com os 3 capítulos).
@@ -77,6 +177,10 @@ struct Story: Codable, Hashable, Identifiable {
     let tags: [String]
     let language: String
     let chapters: [Chapter]
+
+    // MARK: Conteúdo localizado
+    var localizedTitle: String { title.localizedContent }
+    var localizedSummary: String { summary.localizedContent }
 }
 
 struct StoryIndex: Codable {

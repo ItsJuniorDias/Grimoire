@@ -18,7 +18,10 @@ import SwiftUI
 enum GButtonVariant { case primary, secondary, ghost }
 
 struct GButton: View {
-    let title: String
+    /// LocalizedStringKey, nao String: o literal no call site vira chave do
+    /// String Catalog sozinho, como acontece com `Text("...")`. Com String
+    /// o texto passava direto e nunca era traduzido.
+    let title: LocalizedStringKey
     var variant: GButtonVariant = .primary
     var icon: String? = nil
     let action: () -> Void

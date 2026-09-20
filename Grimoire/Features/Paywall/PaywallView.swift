@@ -20,7 +20,7 @@ struct PaywallView: View {
     @State private var selected = GrimoireProduct.annual
     @State private var working = false
 
-    private let valueProps: [(icon: String, title: String, sub: String)] = [
+    private let valueProps: [(icon: String, title: LocalizedStringKey, sub: LocalizedStringKey)] = [
         ("books.vertical.fill", "All 50 stories", "The whole grimoire, always unlocked"),
         ("moon.stars.fill",     "Made for the night",     "Rich ten-minute tales, perfect before bed"),
         ("bookmark.fill",       "Favorites and progress", "Save what you love and pick up where you left off"),
@@ -134,7 +134,7 @@ struct PaywallView: View {
 
     private var props: some View {
         VStack(alignment: .leading, spacing: DS.Space.md) {
-            ForEach(valueProps, id: \.title) { p in
+            ForEach(valueProps, id: \.icon) { p in
                 HStack(spacing: DS.Space.md) {
                     Image(systemName: p.icon)
                         .font(.system(size: 15, weight: .semibold))
@@ -198,7 +198,7 @@ struct PaywallView: View {
                         product: annual,
                         title: "Annual",
                         priceLine: annual.displayPrice,
-                        caption: store.annualPerMonth.map { "\($0)/mo · billed once a year" },
+                        caption: store.annualPerMonth.map { LocalizedStringKey("\($0)/mo · billed once a year") },
                         badge: store.annualSavingsPercent.map { "-\($0)%" },
                         trial: trialText(annual)
                     )
@@ -217,8 +217,8 @@ struct PaywallView: View {
         }
     }
 
-    private func planRow(product: Product, title: String, priceLine: String,
-                         caption: String?, badge: String?, trial: String?) -> some View {
+    private func planRow(product: Product, title: LocalizedStringKey, priceLine: String,
+                         caption: LocalizedStringKey?, badge: String?, trial: String?) -> some View {
         let isSel = selected == product.id
         return Button {
             withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) { selected = product.id }
@@ -292,9 +292,12 @@ struct PaywallView: View {
         // para apps com assinatura). Markdown dentro do texto cria os links.
         let terms = "https://www.notion.so/Grimoire-Terms-of-use-Support-3c72f13e5f7d8071a473eae870a80496"
         let privacy = "https://www.notion.so/Grimoire-Privacy-Policy-3c72f13e5f7d80dea134d6ef542fe560"
-        let text = try! AttributedString(
-            markdown: "The subscription renews automatically until canceled. Cancel anytime in Settings. By continuing, you accept the [Terms of Use](\(terms)) and [Privacy Policy](\(privacy))."
-        )
+        // String(localized:) resolve os %@ na ordem do idioma; alguns
+        // invertem a ordem dos dois links. AttributedString(markdown:) pode
+        // lançar se a tradução tiver colchete solto — o `try?` cai num Text
+        // simples em vez de derrubar o paywall.
+        let raw = String(localized: "The subscription renews automatically until canceled. Cancel anytime in Settings. By continuing, you accept the [Terms of Use](\(terms)) and [Privacy Policy](\(privacy)).")
+        let text = (try? AttributedString(markdown: raw)) ?? AttributedString(raw)
         return Text(text)
             .font(.system(size: 10))
             .foregroundStyle(DS.Colors.textMuted)
@@ -303,7 +306,7 @@ struct PaywallView: View {
             .padding(.horizontal, DS.Space.sm)
     }
 
-    private var ctaTitle: String {
+    private var ctaTitle: LocalizedStringKey {
         if let p = store.products.first(where: { $0.id == selected }), trialText(p) != nil {
             return "Start free trial"
         }
@@ -313,13 +316,19 @@ struct PaywallView: View {
     private func trialText(_ product: Product) -> String? {
         guard let offer = product.subscription?.introductoryOffer,
               offer.paymentMode == .freeTrial else { return nil }
+        // Sem concatenar "s": plural não se forma assim em todo idioma.
+        // Cada forma é uma chave própria no catálogo.
         let n = offer.period.value
         switch offer.period.unit {
-        case .day:   return "\(n) day\(n>1 ? "s" : "") free"
-        case .week:  return "\(n * 7) days free"
-        case .month: return "\(n) month\(n>1 ? "s" : "") free"
-        case .year:  return "1 year free"
-        @unknown default: return "Free trial"
+        case .day:
+            return n > 1 ? String(localized: "\(n) days free")
+                         : String(localized: "\(n) day free")
+        case .week:  return String(localized: "\(n * 7) days free")
+        case .month:
+            return n > 1 ? String(localized: "\(n) months free")
+                         : String(localized: "\(n) month free")
+        case .year:  return String(localized: "1 year free")
+        @unknown default: return String(localized: "Free trial")
         }
     }
 
@@ -329,7 +338,7 @@ struct PaywallView: View {
         let product = store.products.first(where: { $0.id == selected })
             ?? store.annual ?? store.monthly ?? store.products.first
         guard let product else {
-            store.purchaseError = "Plans aren't ready yet. Please try again in a moment."
+            store.purchaseError = String(localized: "Plans aren't ready yet. Please try again in a moment.")
             return
         }
         selected = product.id
