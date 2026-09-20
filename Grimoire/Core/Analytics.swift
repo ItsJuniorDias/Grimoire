@@ -28,9 +28,15 @@ final class Analytics {
     /// ponha o mesmo valor aqui. Se deixou sem, mantenha vazio.
     private let ingestKey = ""
 
-    /// Liga/desliga o envio. Útil para não poluir os dados durante o
-    /// desenvolvimento — deixe false em builds de debug se quiser.
+    /// Liga/desliga o envio. Desligado em DEBUG: rodar o app no simulador,
+    /// testar compra com o .storekit ou abrir a mesma história vinte vezes
+    /// seguidas não pode entrar no funil de conversão. Só build de Release
+    /// (TestFlight e App Store) manda evento.
+    #if DEBUG
+    private let enabled = false
+    #else
     private let enabled = true
+    #endif
 
     private let deviceID: String
     private let appVersion: String
@@ -65,6 +71,11 @@ final class Analytics {
     /// Dispara em background e ignora qualquer falha.
     /// O identificador do jogo é injetado automaticamente em properties.game.
     func track(_ event: Event, _ properties: [String: String] = [:]) {
+        #if DEBUG
+        // Em DEBUG nada sai do aparelho, mas o console mostra o que teria
+        // saído — dá pra conferir o funil sem sujar os dados de produção.
+        print("[analytics/dev] \(event.rawValue)", properties.isEmpty ? "" : "\(properties)")
+        #endif
         guard enabled, let url = URL(string: "\(endpoint)/track") else { return }
 
         // Mescla properties do call site com o identificador do jogo.
