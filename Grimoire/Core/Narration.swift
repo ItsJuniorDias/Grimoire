@@ -48,9 +48,22 @@ final class NarrationController: NSObject {
     private(set) var isPaused: Bool = false
     /// Baixando o pacote de narração da história (On-Demand Resources).
     private(set) var isLoading: Bool = false
+    /// Fração já baixada do pacote, de 0 a 1, enquanto `isLoading`.
+    ///
+    /// O pacote de uma história tem ~4 MB: numa rede ruim são dezenas de
+    /// segundos olhando pra um botão parado. Sem este número o leitor não
+    /// tem como distinguir "baixando" de "travou".
+    private(set) var downloadProgress: Double = 0
     /// O último download falhou — quase sempre falta de internet. O
     /// próximo `toggle` tenta de novo.
     private(set) var loadFailed: Bool = false
+    /// Por que falhou, já traduzido e pronto pra tela.
+    ///
+    /// Antes isto vivia só num `print` de DEBUG, então em release a pessoa
+    /// via um botão de recarregar sem nenhuma explicação — e as causas são
+    /// bem diferentes entre si: sem internet se resolve tentando de novo,
+    /// sem espaço não.
+    private(set) var loadErrorMessage: String?
 
     /// Velocidade da reprodução. AVAudioPlayer aceita 0.5 (metade) até 2.0
     /// (dobro), com 1.0 = normal. Default calmo pra "história antes de dormir".
@@ -125,17 +138,34 @@ final class NarrationController: NSObject {
         // Ainda não está no device: baixa o pacote da história e toca
         // quando chegar.
         isLoading = true
+        downloadProgress = 0
         downloadTask = Task {
             do {
-                let access = try await ContentPackAccess.fetch(.narration(storyID: storyID), urgent: true)
+                let access = try await ContentPackAccess.fetch(
+                    .narration(storyID: storyID),
+                    urgent: true,
+                    // O callback vem em thread arbitrária, daí o salto pro
+                    // MainActor. Sem `[weak self]`: a Task que envolve isto já
+                    // retém self de qualquer jeito, e é o `stop()` que corta o
+                    // ciclo cancelando a task.
+                    onProgress: { fracao in
+                        Task { @MainActor in
+                            self.downloadProgress = fracao
+                        }
+                    })
                 guard !Task.isCancelled else { return }
                 narrationAccess = access
                 isLoading = false
+                downloadProgress = 1
                 guard let url = Self.audioURL(storyID: storyID, chapterIndex: chapterIndex) else {
+                    // Pacote chegou mas o arquivo não apareceu: quase sempre
+                    // MP3 novo sem tag (ver scripts/tag_ondemand_resources.py)
+                    // ou nome fora do padrão st-XXX-chY.mp3.
                     #if DEBUG
                     print("[Narration] MP3 não encontrado: \(storyID)-ch\(chapterIndex).mp3")
                     #endif
                     loadFailed = true
+                    loadErrorMessage = String(localized: "This narration isn't available yet.")
                     return
                 }
                 play(url: url, paragraphs: paragraphs, title: title, subtitle: subtitle, artwork: artwork)
@@ -146,8 +176,35 @@ final class NarrationController: NSObject {
                 #endif
                 isLoading = false
                 loadFailed = true
+                loadErrorMessage = Self.message(for: error)
             }
         }
+    }
+
+    /// Traduz o erro do sistema numa frase que serve pra quem está lendo.
+    ///
+    /// As causas pedem reações diferentes — sem internet se resolve tentando
+    /// de novo, sem espaço não — então uma mensagem genérica não basta.
+    private static func message(for error: Error) -> String {
+        let ns = error as NSError
+        // O overlay Swift não expõe estes códigos como `CocoaError.Code`;
+        // as constantes globais do Foundation são o caminho que existe.
+        if ns.domain == NSCocoaErrorDomain {
+            switch ns.code {
+            case NSBundleOnDemandResourceOutOfSpaceError:
+                return String(localized: "Not enough space to download the narration.")
+            case NSBundleOnDemandResourceInvalidTagError:
+                // Tag que não existe no pbxproj: MP3 novo sem rodar
+                // scripts/tag_ondemand_resources.py.
+                return String(localized: "This narration isn't available yet.")
+            default:
+                break
+            }
+        }
+        if ns.domain == NSURLErrorDomain {
+            return String(localized: "Check your connection and try again.")
+        }
+        return String(localized: "Couldn't download narration. Try again")
     }
 
     /// Carrega e toca um MP3 já acessível.
@@ -228,7 +285,9 @@ final class NarrationController: NSObject {
         downloadTask?.cancel()
         downloadTask = nil
         isLoading = false
+        downloadProgress = 0
         loadFailed = false
+        loadErrorMessage = nil
         player?.stop()
         player = nil
         stopTickTimer()

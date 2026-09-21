@@ -191,6 +191,22 @@ add("Couldn't download narration. Try again",
     "Erzählung konnte nicht geladen werden. Erneut versuchen",
     "Non è stato possibile scaricare la narrazione. Riprova",
     "تعذّر تنزيل السرد. حاول مجدداً")
+# Causas distintas pedem reações distintas: sem internet se resolve tentando
+# de novo, sem espaço não. Ver `NarrationController.message(for:)`.
+add("Not enough space to download the narration.",
+    "Espaço insuficiente para baixar a narração.",
+    "No hay espacio suficiente para descargar la narración.",
+    "Espace insuffisant pour télécharger la narration.",
+    "Nicht genug Speicher, um die Erzählung zu laden.",
+    "Spazio insufficiente per scaricare la narrazione.",
+    "لا توجد مساحة كافية لتنزيل السرد.")
+add("This narration isn't available yet.",
+    "Esta narração ainda não está disponível.",
+    "Esta narración aún no está disponible.",
+    "Cette narration n'est pas encore disponible.",
+    "Diese Erzählung ist noch nicht verfügbar.",
+    "Questa narrazione non è ancora disponibile.",
+    "هذا السرد غير متوفّر بعد.")
 # Narração só existe em inglês — ver ContentLanguage.narrated.
 add("Narration is only available in English",
     "A narração só existe em inglês", "La narración solo existe en inglés",

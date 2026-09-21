@@ -71,9 +71,15 @@ final class ContentPackAccess {
     ///
     /// - Parameter urgent: alguém está parado esperando (tocou em play).
     ///   Passa à frente dos outros downloads do sistema.
+    /// - Parameter onProgress: fração baixada, de 0 a 1, para quem quiser
+    ///   desenhar. Chamado em thread arbitrária — quem usa salta pro ator
+    ///   que precisar. Não é chamado quando o pacote já está no device, que
+    ///   é o caminho que retorna sem tocar na rede.
     /// - Throws: erro de rede, de espaço ou de tag inexistente. Cancelar a
     ///   Task interrompe o download de verdade e também cai aqui.
-    static func fetch(_ pack: ContentPack, urgent: Bool = false) async throws -> ContentPackAccess {
+    static func fetch(_ pack: ContentPack,
+                      urgent: Bool = false,
+                      onProgress: (@Sendable (Double) -> Void)? = nil) async throws -> ContentPackAccess {
         let request = NSBundleResourceRequest(tags: [pack.tag])
         if urgent {
             request.loadingPriority = NSBundleResourceRequestLoadingPriorityUrgent
@@ -84,7 +90,20 @@ final class ContentPackAccess {
             return ContentPackAccess(pack: pack, request: request)
         }
 
+        // A partir daqui há download de verdade, e ele pode levar minutos num
+        // 3G ruim. O `Progress` do request já existe e é KVO-compliant; o que
+        // faltava era alguém escutar.
         let progress = request.progress
+        let token = onProgress.map { publicar in
+            progress.observe(\.fractionCompleted, options: [.initial, .new]) { progresso, _ in
+                publicar(progresso.fractionCompleted)
+            }
+        }
+        // `invalidate` no defer: a observação não pode sobreviver ao download,
+        // senão segura o `Progress` e continua publicando depois que a tela
+        // já seguiu adiante.
+        defer { token?.invalidate() }
+
         try await withTaskCancellationHandler {
             try await request.beginAccessingResources()
         } onCancel: {

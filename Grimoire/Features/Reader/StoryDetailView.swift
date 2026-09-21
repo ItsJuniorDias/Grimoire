@@ -352,36 +352,19 @@ struct ReaderView: View {
                 // faixa inglesa pra quem pos o app em portugues entrega uma voz
                 // que a pessoa nao pediu — pior que nao ter audio.
                 if ContentLanguage.hasNarration {
-                Button {
-                    if let chapter {
-                        // Só conta como "narração iniciada" se estava parado —
-                        // pausar/retomar e tocar durante o download não
-                        // disparam evento.
-                        let willStart = !narration.isSpeaking && !narration.isPaused
-                            && !narration.isLoading
-                        narration.toggle(
-                            storyID: story.id,
-                            chapterIndex: current,
-                            paragraphs: chapter.paragraphs,
-                            title: story.title,
-                            subtitle: String(localized: "Chapter \(current) · \(chapter.localizedTitle)"),
-                            artwork: story.cover.asset
-                        )
-                        if willStart {
-                            analytics.track(.narration_started,
-                                            ["story_id": story.id, "chapter": String(current)])
-                        }
+                    // O status fica ACIMA do botão, não dentro: um pacote de
+                    // narração tem ~4 MB e numa rede ruim são dezenas de
+                    // segundos. Um spinner de 20pt dentro do FAB não distingue
+                    // "baixando" de "travou", e não diz nada quando falha.
+                    VStack(alignment: .trailing, spacing: DS.Space.xs) {
+                        narrationStatus
+                        narrationButton
                     }
-                } label: {
-                    narrationGlyph
-                        .font(.system(size: 22, weight: .bold))
-                        .foregroundStyle(DS.Palette.ink900)
-                        .frame(width: 60, height: 60)
-                        .background(Circle().fill(DS.Colors.accent))
-                        .dsShadow(.lg)
-                }
-                .padding(DS.Space.lg)
-                .accessibilityLabel(narrationLabel)
+                    .padding(DS.Space.lg)
+                    .animation(.easeOut(duration: DS.Motion.normal),
+                               value: narration.isLoading)
+                    .animation(.easeOut(duration: DS.Motion.normal),
+                               value: narration.loadFailed)
                 }
             }
         }
@@ -422,14 +405,124 @@ struct ReaderView: View {
         .padding(.vertical, DS.Space.xxl)
     }
 
+    /// O FAB de narração, com anel de progresso durante o download.
+    private var narrationButton: some View {
+        Button {
+            if let chapter {
+                // Só conta como "narração iniciada" se estava parado —
+                // pausar/retomar e tocar durante o download não disparam
+                // evento.
+                let willStart = !narration.isSpeaking && !narration.isPaused
+                    && !narration.isLoading
+                narration.toggle(
+                    storyID: story.id,
+                    chapterIndex: current,
+                    paragraphs: chapter.paragraphs,
+                    title: story.title,
+                    subtitle: String(localized: "Chapter \(current) · \(chapter.localizedTitle)"),
+                    artwork: story.cover.asset
+                )
+                if willStart {
+                    analytics.track(.narration_started,
+                                    ["story_id": story.id, "chapter": String(current)])
+                }
+            }
+        } label: {
+            ZStack {
+                Circle().fill(DS.Colors.accent)
+
+                // Anel de progresso. Só entra depois da primeira fração: com
+                // 0% ele pareceria um botão quebrado, e nesse instante o
+                // indeterminado do miolo é mais honesto.
+                if narration.isLoading, narration.downloadProgress > 0 {
+                    Circle()
+                        .trim(from: 0, to: narration.downloadProgress)
+                        .stroke(DS.Palette.ink900.opacity(0.55),
+                                style: StrokeStyle(lineWidth: 3, lineCap: .round))
+                        .rotationEffect(.degrees(-90))   // começa no topo
+                        .padding(5)
+                        .animation(.easeOut(duration: DS.Motion.normal),
+                                   value: narration.downloadProgress)
+                }
+
+                narrationGlyph
+                    .font(.system(size: 22, weight: .bold))
+                    .foregroundStyle(DS.Palette.ink900)
+            }
+            .frame(width: 60, height: 60)
+            .dsShadow(.lg)
+        }
+        .accessibilityLabel(narrationLabel)
+    }
+
+    /// Pílula de status acima do FAB: o que está acontecendo e, quando dá
+    /// errado, por quê.
+    ///
+    /// Antes isto não existia — o erro morria num `print` de DEBUG e em
+    /// release sobrava um botão de recarregar sem explicação nenhuma.
+    @ViewBuilder
+    private var narrationStatus: some View {
+        if narration.isLoading {
+            statusPill(tint: DS.Colors.border) {
+                Image(systemName: "arrow.down.circle")
+                    .font(.system(size: 11, weight: .bold))
+                Text("Downloading narration")
+                    .font(DS.Typography.caption)
+                if narration.downloadProgress > 0 {
+                    Text(narration.downloadProgress,
+                         format: .percent.precision(.fractionLength(0)))
+                        .font(DS.Typography.caption.monospacedDigit())
+                        .foregroundStyle(DS.Colors.textMuted)
+                }
+            }
+        } else if narration.loadFailed, let motivo = narration.loadErrorMessage {
+            statusPill(tint: DS.Colors.brass.opacity(0.5)) {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 11, weight: .bold))
+                    .foregroundStyle(DS.Colors.brass)
+                // Já traduzido pelo NarrationController — `Text(String)` não
+                // re-localiza, que é o certo aqui.
+                Text(motivo)
+                    .font(DS.Typography.caption)
+                    .multilineTextAlignment(.leading)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+    }
+
+    private func statusPill<Content: View>(
+        tint: Color,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        HStack(spacing: DS.Space.xs) {
+            content()
+        }
+        .foregroundStyle(DS.Colors.textSecondary)
+        .padding(.horizontal, DS.Space.sm)
+        .padding(.vertical, DS.Space.xs)
+        .frame(maxWidth: 230, alignment: .leading)
+        .fixedSize(horizontal: true, vertical: false)
+        .background(DS.Colors.surface, in: .rect(cornerRadius: DS.Radius.md))
+        .overlay(RoundedRectangle(cornerRadius: DS.Radius.md)
+            .stroke(tint, lineWidth: 1))
+        .dsShadow(.md)
+        .transition(.opacity.combined(with: .move(edge: .trailing)))
+    }
+
     /// Miolo do botão de narração. A narração é On-Demand Resource (ver
-    /// ContentPacks.swift): o primeiro play de uma história baixa o áudio,
-    /// e o botão é o único lugar do leitor que mostra isso.
+    /// ContentPacks.swift): o primeiro play de uma história baixa o áudio.
     @ViewBuilder
     private var narrationGlyph: some View {
         if narration.isLoading {
-            ProgressView()
-                .tint(DS.Palette.ink900)
+            // Sem fração ainda: o indeterminado é honesto, porque de fato não
+            // dá pra dizer quanto falta. Quando a primeira fração chega, o
+            // anel assume o progresso e o miolo vira a seta.
+            if narration.downloadProgress > 0 {
+                Image(systemName: "arrow.down")
+            } else {
+                ProgressView()
+                    .tint(DS.Palette.ink900)
+            }
         } else {
             Image(systemName: narrationIcon)
         }
