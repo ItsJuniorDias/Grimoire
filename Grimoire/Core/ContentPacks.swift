@@ -80,6 +80,32 @@ final class ContentPackAccess {
     static func fetch(_ pack: ContentPack,
                       urgent: Bool = false,
                       onProgress: (@Sendable (Double) -> Void)? = nil) async throws -> ContentPackAccess {
+        do {
+            return try await attempt(pack, urgent: urgent, onProgress: onProgress)
+        } catch let erro where isTransient(erro) {
+            // O XPC do ODR caiu no meio ("Connection invalidated to streaming
+            // unzip service"). É falha de transporte, não de conteúdo: o
+            // pacote existe e a tag está certa, quem morreu foi o serviço que
+            // descompacta. Uma segunda tentativa pega uma conexão nova.
+            //
+            // Uma só. Se a segunda também cair, o problema não é transitório —
+            // insistir viraria laço e a tela já sabe dizer que falhou.
+            try await Task.sleep(for: .milliseconds(600))
+            return try await attempt(pack, urgent: urgent, onProgress: onProgress)
+        }
+    }
+
+    /// Falha que vale repetir: o serviço do ODR caiu, não o download.
+    private static func isTransient(_ error: Error) -> Bool {
+        let ns = error as NSError
+        guard ns.domain == NSCocoaErrorDomain else { return false }
+        return ns.code == NSXPCConnectionInvalid
+            || ns.code == NSXPCConnectionInterrupted
+    }
+
+    private static func attempt(_ pack: ContentPack,
+                                urgent: Bool,
+                                onProgress: (@Sendable (Double) -> Void)?) async throws -> ContentPackAccess {
         let request = NSBundleResourceRequest(tags: [pack.tag])
         if urgent {
             request.loadingPriority = NSBundleResourceRequestLoadingPriorityUrgent
