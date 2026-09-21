@@ -28,26 +28,50 @@ extension String {
 
     /// Resolve esta string como CONTEÚDO traduzido.
     ///
-    /// A ideia: título, sinopse, título de capítulo e corpo do capítulo
-    /// existem em inglês no JSON do bundle, e a tradução vive no
-    /// `Localizable.xcstrings` com a própria string-fonte como chave. Pedir
-    /// `.localizedContent` devolve a versão no idioma corrente ou, se ela
-    /// não existir, a string em inglês de volta — o fallback nativo do
-    /// String Catalog, sem `if` nenhum do nosso lado.
+    /// A ideia: título, sinopse, título de capítulo e tag existem em inglês
+    /// no JSON do bundle, e a tradução vem de uma destas três fontes, nesta
+    /// ordem de precedência:
+    ///
+    ///     tradução humana (catálogo)  →  máquina (cache)  →  inglês
+    ///
+    ///   1. `Localizable.xcstrings`, com a própria string-fonte como chave.
+    ///      É o que vale para as tags, que são palavra solta e é onde a
+    ///      máquina mais erra.
+    ///   2. `CatalogTranslation`, que traduz o catálogo no aparelho em lote
+    ///      e guarda em disco. Cobre título, sinopse e título de capítulo, e
+    ///      é a rede de segurança de qualquer texto que entre sem tradução
+    ///      humana.
+    ///   3. O inglês de volta, que é a string original.
+    ///
+    /// A ordem importa: humana ganha sempre. Adicionar uma tradução humana
+    /// no catálogo aposenta a da máquina sozinha, sem tocar em código.
     ///
     /// Nome diferente de `.localized` de propósito: este é o caminho do
     /// CONTEÚDO. Rótulo de interface passa pelo `LocalizedStringKey` de
     /// sempre, que o SwiftUI resolve sozinho.
     ///
+    /// O corpo do capítulo NÃO passa por aqui — é texto longo, precisa de
+    /// contexto inteiro numa requisição só, e tem tela de progresso própria.
+    /// Ver `ChapterTranslation`.
+    ///
     /// COMO ADICIONAR TRADUÇÃO HUMANA DE CONTEÚDO:
-    ///   1. Abra `Grimoire/Localizable.xcstrings` no Xcode.
+    ///   1. Abra `scripts/build_strings_catalog.py`.
     ///   2. Chave nova = o texto em inglês inteiro, do primeiro ao último
     ///      caractere, exatamente como está no JSON.
-    ///   3. Preencha os 6 idiomas. Parcial funciona — o que faltar cai no
-    ///      inglês, e o `ChapterTranslation` nem entra em ação onde há
-    ///      tradução humana.
+    ///   3. Preencha os 6 idiomas e rode o script. Ele falha se faltar um.
     var localizedContent: String {
-        String(localized: LocalizedStringResource(stringLiteral: self))
+        // 1. Humana. O String Catalog devolve a própria chave quando não há
+        //    entrada, então "veio diferente" é o sinal de que existe.
+        let humana = String(localized: LocalizedStringResource(stringLiteral: self))
+        if humana != self { return humana }
+
+        // 2. Máquina. Ler `entries` aqui dentro do `body` de uma view é o que
+        //    registra a dependência de observação e faz a tela se redesenhar
+        //    quando o lote chega.
+        if let maquina = CatalogTranslation.shared.entries[self] { return maquina }
+
+        // 3. Inglês.
+        return self
     }
 }
 

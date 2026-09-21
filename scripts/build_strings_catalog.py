@@ -429,13 +429,13 @@ add("Reopen Grimoire to finish switching.",
     "Öffne Grimoire neu, um den Wechsel abzuschließen.",
     "Riapri Grimoire per completare il cambio.",
     "أعد فتح Grimoire لإتمام التبديل.")
-add("Stories are translated on your device the first time you open a chapter.",
-    "As histórias são traduzidas no seu aparelho na primeira vez que você abre um capítulo.",
-    "Las historias se traducen en tu dispositivo la primera vez que abres un capítulo.",
-    "Les histoires sont traduites sur votre appareil à la première ouverture d'un chapitre.",
-    "Geschichten werden beim ersten Öffnen eines Kapitels auf deinem Gerät übersetzt.",
-    "Le storie vengono tradotte sul tuo dispositivo alla prima apertura di un capitolo.",
-    "تُترجم الحكايات على جهازك عند أول فتح لأي فصل.")
+add("Titles and stories are translated on your device, and saved for next time.",
+    "Títulos e histórias são traduzidos no seu aparelho e ficam salvos para a próxima.",
+    "Los títulos y las historias se traducen en tu dispositivo y quedan guardados para la próxima.",
+    "Les titres et les histoires sont traduits sur votre appareil et conservés pour la suite.",
+    "Titel und Geschichten werden auf deinem Gerät übersetzt und für später gespeichert.",
+    "Titoli e storie vengono tradotti sul tuo dispositivo e restano salvati per la prossima volta.",
+    "تُترجم العناوين والحكايات على جهازك وتُحفظ للمرات القادمة.")
 
 # ═══════════════════════════════════════════════════════════════════════
 # Paywall

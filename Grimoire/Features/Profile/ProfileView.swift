@@ -315,7 +315,7 @@ struct ProfileView: View {
 
                 Divider().overlay(DS.Colors.border)
 
-                Text("Stories are translated on your device the first time you open a chapter.")
+                Text("Titles and stories are translated on your device, and saved for next time.")
                     .font(DS.Typography.caption)
                     .foregroundStyle(DS.Colors.textMuted)
                     .fixedSize(horizontal: false, vertical: true)

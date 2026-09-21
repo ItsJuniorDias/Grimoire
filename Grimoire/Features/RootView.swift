@@ -10,6 +10,8 @@
 //
 
 import SwiftUI
+// Pelo `.translationTask`, que é extensão de View vinda daqui.
+import Translation
 
 enum AppTab: Hashable {
     case home, favorites, profile
@@ -34,6 +36,19 @@ struct RootView: View {
             }
         }
         .task { if store.products.isEmpty { await store.load() } }
+        // Tradução do catálogo (título, sinopse, título de capítulo, tag).
+        //
+        // Fica na raiz porque `.translationTask` precisa de uma view viva
+        // para vender a sessão, e esta é a única que existe em toda a vida do
+        // app — inclusive durante o onboarding, para que a Home já apareça
+        // traduzida quando a pessoa chegar nela.
+        //
+        // `configuration` é nil na maioria das aberturas — app em inglês, ou
+        // catálogo já traduzido e lido do cache no init — e então isto não
+        // faz nada. Ver Core/CatalogTranslation.swift.
+        .translationTask(CatalogTranslation.shared.configuration) { session in
+            await CatalogTranslation.shared.run(session: session)
+        }
     }
 
     private var tabs: some View {

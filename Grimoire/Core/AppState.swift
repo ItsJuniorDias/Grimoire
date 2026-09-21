@@ -176,6 +176,10 @@ final class AppState {
         do {
             catalog = try StoryLoader.loadIndex().stories.sorted { $0.order < $1.order }
             loadError = nil
+            // Fora do inglês, põe título, sinopse e tags na fila de tradução.
+            // É no-op quando o app está em inglês ou quando o cache em disco
+            // já cobre tudo. Ver Core/CatalogTranslation.swift.
+            CatalogTranslation.shared.requestCatalog(catalog)
         } catch {
             loadError = error.localizedDescription
             catalog = []
@@ -417,10 +421,12 @@ final class AppState {
             rankSymbolName: rank.symbol,
             storiesToNextRank: storiesToNextRank,
             continueStoryID: cont?.story.id,
-            continueTitle: cont?.story.title,
+            // Título traduzido, não o inglês cru: o widget é interface, e
+            // aparece ao lado de rótulos que o sistema já traduz.
+            continueTitle: cont?.story.localizedTitle,
             continueNextChapter: cont?.nextChapter,
             dailyStoryID: daily?.id,
-            dailyStoryTitle: daily?.title,
+            dailyStoryTitle: daily?.localizedTitle,
             dailyStoryReadingMinutes: daily?.readingMinutes,
             generatedAt: Date()
         )

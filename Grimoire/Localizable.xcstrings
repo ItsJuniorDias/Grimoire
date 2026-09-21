@@ -4889,53 +4889,6 @@
         }
       }
     },
-    "Stories are translated on your device the first time you open a chapter.": {
-      "extractionState": "manual",
-      "localizations": {
-        "ar": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "تُترجم الحكايات على جهازك عند أول فتح لأي فصل."
-          }
-        },
-        "de": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Geschichten werden beim ersten Öffnen eines Kapitels auf deinem Gerät übersetzt."
-          }
-        },
-        "en": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Stories are translated on your device the first time you open a chapter."
-          }
-        },
-        "es": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Las historias se traducen en tu dispositivo la primera vez que abres un capítulo."
-          }
-        },
-        "fr": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Les histoires sont traduites sur votre appareil à la première ouverture d'un chapitre."
-          }
-        },
-        "it": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Le storie vengono tradotte sul tuo dispositivo alla prima apertura di un capitolo."
-          }
-        },
-        "pt-BR": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "As histórias são traduzidas no seu aparelho na primeira vez que você abre um capítulo."
-          }
-        }
-      }
-    },
     "Stories that\naren't afraid of the dark": {
       "extractionState": "manual",
       "localizations": {
@@ -5543,6 +5496,53 @@
           "stringUnit": {
             "state": "translated",
             "value": "Três histórias novas estão grátis"
+          }
+        }
+      }
+    },
+    "Titles and stories are translated on your device, and saved for next time.": {
+      "extractionState": "manual",
+      "localizations": {
+        "ar": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "تُترجم العناوين والحكايات على جهازك وتُحفظ للمرات القادمة."
+          }
+        },
+        "de": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titel und Geschichten werden auf deinem Gerät übersetzt und für später gespeichert."
+          }
+        },
+        "en": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titles and stories are translated on your device, and saved for next time."
+          }
+        },
+        "es": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Los títulos y las historias se traducen en tu dispositivo y quedan guardados para la próxima."
+          }
+        },
+        "fr": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Les titres et les histoires sont traduits sur votre appareil et conservés pour la suite."
+          }
+        },
+        "it": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Titoli e storie vengono tradotti sul tuo dispositivo e restano salvati per la prossima volta."
+          }
+        },
+        "pt-BR": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Títulos e histórias são traduzidos no seu aparelho e ficam salvos para a próxima."
           }
         }
       }

@@ -209,8 +209,16 @@ struct StoryDetailView: View {
     }
 
     private func load() async {
-        do { story = try StoryLoader.loadStory(id: summary.id) }
-        catch { loadError = "Couldn't open this story." }
+        do {
+            let carregada = try StoryLoader.loadStory(id: summary.id)
+            story = carregada
+            // Os títulos dos capítulos só existem depois de abrir o JSON, então
+            // não dá para pedi-los junto com o índice no launch. Pede aqui, que
+            // é onde a lista de capítulos vai aparecer.
+            CatalogTranslation.shared.requestChapters(carregada)
+        } catch {
+            loadError = "Couldn't open this story."
+        }
     }
 }
 
